@@ -2,16 +2,16 @@
 
 For reference, the example applications and Eclipse projects are located here:
 
-[projects/examples](projects/examples)
+[projects/examples](../projects/examples)
 
 These examples mostly revolve around implementing the "echo" Unix utility using the Imperio options library. Note that the intent is to implement GNU echo, not e.g. the bash version of echo.
 
 
 # E1: Barebones - Create a basic app with some flags.
 
-Project: [Echo](projects/examples/Echo)
+Project: [Echo](../projects/examples/Echo)
 
-Package: [com.imperio.examples.echo.p01barebones](projects/examples/Echo/src/com/imperio/examples/echo/p01barebones)
+Package: [com.imperio.examples.echo.p01barebones](../projects/examples/Echo/src/com/imperio/examples/echo/p01barebones)
 
 The echo.p1barebones package contains example code for creating a dummy "echo" command. This application takes a number of parameters which correspond to the parameters used by the standard echo command.
 
@@ -58,9 +58,9 @@ You can test out the error handling by running the app with the "-x" parameter. 
 
 # E2: Enum - Represent all possible options with an enum
 
-Project: [Echo](projects/examples/Echo)
+Project: [Echo](../projects/examples/Echo)
 
-Package: [com.imperio.examples.echo.p02enum](projects/examples/Echo/src/com/imperio/examples/echo/p02enum)
+Package: [com.imperio.examples.echo.p02enum](../projects/examples/Echo/src/com/imperio/examples/echo/p02enum)
 
 This example does not, strictly speaking, deal with the Imperio library. Rather, it demonstrates a recommended practice for applications using Imperio.
 
@@ -70,9 +70,9 @@ The best way to do this is by using an enum. In this example, you can see that a
 
 # E3: POSIX - Add POSIX-style options and improve the help text
 
-Project: [Echo](projects/examples/Echo) 
+Project: [Echo](../projects/examples/Echo) 
 
-Package: [com.imperio.examples.echo.p03posix](projects/examples/Echo/src/com/imperio/examples/echo/p03posix)
+Package: [com.imperio.examples.echo.p03posix](../projects/examples/Echo/src/com/imperio/examples/echo/p03posix)
 
 So far, we've created options that map to the Unix echo command, but most of echo's options are single-character options. And we've only provided long-form option names.
 
@@ -90,9 +90,9 @@ And finally, we've removed the long-form option names from echo's single-charact
 
 # E4: Processed - Handling "help" and echo strings
 
-Project: [Echo](projects/examples/Echo) 
+Project: [Echo](../projects/examples/Echo) 
 
-Package: [com.imperio.examples.echo.p04processed](projects/examples/Echo/src/com/imperio/examples/echo/p04processed)
+Package: [com.imperio.examples.echo.p04processed](../projects/examples/Echo/src/com/imperio/examples/echo/p04processed)
 
 Now that we've updated the help text with echo's text, we should probably update our app to actually adhere to the description: "display this help and exit".
 
@@ -104,9 +104,9 @@ This example makes use of an Imperio.processArgs() overload which takes a String
 
 # E5: Linked Flags - Linking multiple flags to the same value
 
-Project: [Echo](projects/examples/Echo) 
+Project: [Echo](../projects/examples/Echo) 
 
-Package: [com.imperio.examples.echo.p05linkedflags](projects/examples/Echo/src/com/imperio/examples/echo/p05linkedflags)
+Package: [com.imperio.examples.echo.p05linkedflags](../projects/examples/Echo/src/com/imperio/examples/echo/p05linkedflags)
 
 The Echo application could add some logic to interpret the -e and -E values to see whether or not the newline should be printed. However, it is cleaner to simply use Imperio to explicitly link the two Flag types. The OptionSpec can be provided with an Option parameter using the "linkOption" field. If we provide this parameter when instantiating an OptionType.FLAG option, it will be interpreted as the opposite of that option. Basically, the value of one will always be the inverse of the value of the other (and their default values will also be inverses).
 
@@ -125,17 +125,17 @@ You can test the functionality by running this example with several sets of opti
 
 # E6: Help Addenda - Adding additional help text
 
-Project: [Echo](projects/examples/Echo) 
+Project: [Echo](../projects/examples/Echo) 
 
-Package: [com.options.examples.echo.p06helpaddenda](projects/examples/Echo/src/com/options/examples/echo/p06helpaddenda)
+Package: [com.options.examples.echo.p06helpaddenda](../projects/examples/Echo/src/com/options/examples/echo/p06helpaddenda)
 
 The help text so far has been missing a lot of information included in echo's documentation. This example adds a little bit of the missing documentation to demonstrate how you can append additional documentation at the end of the help text simply by setting the "helpAddenda" field in your ImperioAppSpec object.
 
 # E7: Help - Full customization
 
-Project: [Echo](projects/examples/Echo) 
+Project: [Echo](../projects/examples/Echo) 
 
-Package: [com.options.examples.echo.p07help](projects/examples/Echo/src/com/options/examples/echo/p07help)
+Package: [com.options.examples.echo.p07help](../projects/examples/Echo/src/com/options/examples/echo/p07help)
 
 Previous examples have shown how to make tweaks to the automagically generated help text. It is also possible to go the nuclear route and completely replace the help-text-generation code with your own code. To do so, simply set the ImperioAppSpec's "helpGen" field.
 
@@ -145,9 +145,9 @@ We also implement a custom Usage class. The class must extend Imperio's UsageGen
 
 # E8: Echo - Full implementation
 
-Project: [Echo](projects/examples/Echo)
+Project: [Echo](../projects/examples/Echo)
 
-Package: [com.options.examples.echo.p08complete](projects/examples/Echo/src/com/options/examples/echo/p08complete)
+Package: [com.options.examples.echo.p08complete](../projects/examples/Echo/src/com/options/examples/echo/p08complete)
 
 In this example, the final code for Echo matches the behavior of GNU echo almost exactly.
 
@@ -307,9 +307,9 @@ end
 
 # E9: Rush - Miscellaneous advanced features
 
-Project: [Rush](projects/examples/Rush)
+Project: [Rush](../projects/examples/Rush)
 
-Package: [com.options.examples.rush](projects/examples/Rush/src/com/options/examples/rush)
+Package: [com.options.examples.rush](../projects/examples/Rush/src/com/options/examples/rush)
 
 The Echo command doesn't make full use of the available Imperio features, so this example is an app that doesn't do much, but does exhibit some of the more complex functionality Imperio supports.
 

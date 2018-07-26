@@ -48,14 +48,18 @@ task release(dependsOn: [build]) {
 
     doLast {
 
-        def jarPath = dirLibs + '/' + libName + '.jar';
+        def jarBase = dirLibs + '/' + libName;
+
+        def jarPath = jarBase + '.jar';
+        def jarVer  = jarBase + '-' + versionMain + '.jar';
 
         ant.copy(
-            file: dirLibs + '/' + libName + '-' + versionMain + '.jar',
+            file: jarVer,
             tofile: jarPath,
             overwrite: true) {
         }
 
+        logger.lifecycle('Jar available at: {}', jarVer);
         logger.lifecycle('Jar available at: {}', jarPath);
     }
 }
