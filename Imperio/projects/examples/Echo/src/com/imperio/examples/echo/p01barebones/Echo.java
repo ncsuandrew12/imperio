@@ -15,13 +15,13 @@ public class Echo {
         iaSpec.invocation = "echo";
         ImperioApp impApp = ImperioApp.generate(iaSpec);
         optSpec.name = "no-newline";
-        impApp.add(Option.generate(optSpec));
+        impApp.addOption(Option.generate(optSpec));
         optSpec.name = "escape";
-        impApp.add(Option.generate(optSpec));
+        impApp.addOption(Option.generate(optSpec));
         optSpec.name = "no-escape";
-        impApp.add(Option.generate(optSpec));
+        impApp.addOption(Option.generate(optSpec));
         optSpec.name = "version";
-        impApp.add(Option.generate(optSpec));
+        impApp.addOption(Option.generate(optSpec));
 
         impApp.processArgs(args);
     }

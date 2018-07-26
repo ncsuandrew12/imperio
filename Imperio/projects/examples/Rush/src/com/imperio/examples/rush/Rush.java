@@ -50,7 +50,7 @@ public class Rush {
         {
             Parameter[] parms = Parameter.values();
             for (int i = 0; i < parms.length; i++) {
-                impApp.add(parms[i].getOpt());
+                impApp.addOption(parms[i].getOpt());
             }
         }
 

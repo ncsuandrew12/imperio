@@ -164,7 +164,7 @@ public class ImperioApp {
         this.seeAlso = seeAlso;
         this.usageAddenda = usageAddenda;
         this.usageGen = usage;
-        add(helpOpt);
+        addOption(helpOpt);
     }
 
     public void addExample(String[] args) {
@@ -200,7 +200,7 @@ public class ImperioApp {
         return new ExampleCommand(examples.get(index).description, args);
     }
 
-    public void add(Option option) throws OptionException {
+    public void addOption(Option option) throws OptionException {
         Character ch = option.character;
         String name = option.name;
         OptionIndex index = new OptionIndex(name, ch);
