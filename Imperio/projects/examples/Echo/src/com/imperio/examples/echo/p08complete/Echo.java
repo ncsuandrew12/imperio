@@ -71,7 +71,7 @@ public class Echo {
         {
             Parameter[] parms = Parameter.values();
             for (int i = 0; i < parms.length; i++) {
-                impApp.add(parms[i].getOpt());
+                impApp.addOption(parms[i].getOpt());
             }
         }
 
@@ -137,7 +137,6 @@ public class Echo {
                                 numChars = 0;
                                 state = EscState.OCT;
                                 if (chi == nonOpts[noi].length() - 1) {
-                                    ps.print("\\0");
                                     continue charloop;
                                 }
                                 break;
@@ -146,7 +145,6 @@ public class Echo {
                                 numChars = 0;
                                 state = EscState.HEX;
                                 if (chi == nonOpts[noi].length() - 1) {
-                                    System.out.println("printing \\x");
                                     ps.print("\\x");
                                     continue charloop;
                                 }
@@ -215,13 +213,7 @@ public class Echo {
                                 chi--; // We need to re-run this character.
                                 state = EscState.PLAIN;
                             }
-                            if ((numChars == 0) && (nonChar
-                                    || (chi == nonOpts[noi].length() - 1))) {
-                                ps.print('\\');
-                                if (nonChar) {
-                                    ps.print('0');
-                                }
-                            } else if (nonChar || (numChars == 3)
+                            if ((nonChar && (numChars > 0)) || (numChars == 3)
                                     || (chi == nonOpts[noi].length() - 1)) {
                                 ps.print(Character.toString((char) num));
                                 state = EscState.PLAIN;
@@ -238,6 +230,7 @@ public class Echo {
             }
 
             System.out.print(baos.toString());
+
         } finally {
             ps.close();
         }
