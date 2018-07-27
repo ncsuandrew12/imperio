@@ -1,3 +1,26 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2018 by Andrew Felsher
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.imperio.examples.echo.p08complete;
 
 import java.io.ByteArrayOutputStream;
@@ -18,7 +41,7 @@ import com.imperio.examples.echo.p07help.Usage;
 public class Echo {
 
     public enum EscState {
-        PLAIN, ESC, OCT, HEX;
+        ESC, HEX, OCT, PLAIN;
     }
 
     public static void main(String[] args)
@@ -81,7 +104,7 @@ public class Echo {
         }
         String[] nonOpts = sac.arr;
 
-        if (Parameter.VERSION.getOpt().isSet()) {
+        if (Parameter.VERSION.getOpt().isFlagSet()) {
             System.out.println("echo (GNU coreutils) 8.22");
             System.out.println(
                     "Copyright (C) 2013 Free Software Foundation, Inc.");
@@ -96,7 +119,7 @@ public class Echo {
             System.exit(0);
         }
 
-        boolean println = !Parameter.NO_NEWLINE.getOpt().isSet();
+        boolean println = !Parameter.NO_NEWLINE.getOpt().isFlagSet();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -108,7 +131,7 @@ public class Echo {
                 if (noi > 0) {
                     ps.print(" ");
                 }
-                if (!Parameter.BACKSLASHES_ESCAPE.getOpt().isSet()) {
+                if (!Parameter.BACKSLASHES_ESCAPE.getOpt().isFlagSet()) {
                     ps.print(nonOpts[noi]);
                 } else {
                     int num = 0x0;

@@ -1,5 +1,33 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2018 by Andrew Felsher
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.imperio;
 
+/**
+ * @author afelsher
+ *
+ * @since 1.0.0
+ */
 public class OptionSpec {
 
     public final static String DEFAULT_ARG_VAL_DESCRPTION = "arg";
@@ -29,9 +57,17 @@ public class OptionSpec {
     public OptionType type = DEFAULT_OPTION_TYPE;
     public String valPlaceholder = DEFAULT_VAL_PLACEHOLDER;
 
+    /**
+     * @since 1.0.0
+     */
     public OptionSpec() {
     }
 
+    /**
+     * @param spec
+     * 
+     * @since 1.0.0
+     */
     public OptionSpec(OptionSpec spec) {
         this.auto = spec.auto;
         this.required = spec.required;

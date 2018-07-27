@@ -1,3 +1,26 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2018 by Andrew Felsher
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.imperio;
 
 import java.io.ByteArrayOutputStream;
@@ -6,21 +29,43 @@ import java.util.ListIterator;
 
 import org.apache.commons.exec.CommandLine;
 
+/**
+ * @author afelsher
+ *
+ * @since 1.0.0
+ */
 public class HelpGen {
 
+    /**
+     * @author afelsher
+     *
+     * @since 1.0.0
+     */
     private enum CharState {
         CONCAT,
         LINE_BUILD,
         LINE_PRINT,
         NUM_BUILD,
         SKIP_SPACE,
-        WORD_BUILD,
-        TOKEN_CONCAT;
+        TOKEN_CONCAT,
+        WORD_BUILD;
     }
 
+    /**
+     * @since 1.0.0
+     */
     public HelpGen() {
     }
 
+    /**
+     * @param impApp
+     * 
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public String getHelp(ImperioApp impApp) throws OptionException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
@@ -33,10 +78,25 @@ public class HelpGen {
         }
     }
 
+    /**
+     * @param impApp
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public void printHelp(ImperioApp impApp) throws OptionException {
         printHelp(System.out, impApp);
     }
 
+    /**
+     * @param ps
+     * @param impApp
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public void printHelp(PrintStream ps, ImperioApp impApp)
             throws OptionException {
         String indent = "        ";
@@ -86,8 +146,8 @@ public class HelpGen {
                 ps.println();
                 wrap(ps, indent + indent, 2 * indentLen, opt.description);
             }
-            if ((opt.type == OptionType.FLAG) && (opt.defaultValue != null)
-                    && ((boolean) opt.defaultValue)) {
+            if ((opt.type == OptionType.FLAG) && (opt.getDefaultValue() != null)
+                    && (opt.getDefaultValueBoolean())) {
                 ps.printf(" (default)");
             }
             ps.println();
@@ -171,6 +231,14 @@ public class HelpGen {
         }
     }
 
+    /**
+     * @param ps
+     * @param indent
+     * @param indentLen
+     * @param str
+     * 
+     * @since 1.0.0
+     */
     private void wrap(PrintStream ps, String indent, int indentLen,
             String str) {
         int wrapWidth = 80 -indentLen;

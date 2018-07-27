@@ -1,3 +1,26 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2018 by Andrew Felsher
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.imperio;
 
 import java.io.StringWriter;
@@ -105,13 +128,20 @@ import java.util.Map;
  * value "mycharlie" for Charlie
  * 
  * "-acb" and "-acb mycharlie" would be invalid
- * 
- * @param args
- * @return
- * @throws OptionException
+ *
+ * @since 1.0.0
  */
 public class ImperioApp {
 
+    /**
+     * @param spec
+     * 
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public static ImperioApp generate(ImperioAppSpec spec)
             throws OptionException {
         ImperioApp ret = new ImperioApp(spec.author, spec.copyright,
@@ -167,10 +197,6 @@ public class ImperioApp {
         addOption(helpOpt);
     }
 
-    public void addExample(String[] args) {
-        addExample(null, args);
-    }
-
     /**
      * Add an example command using the given arguments.
      * 
@@ -182,24 +208,29 @@ public class ImperioApp {
      * 
      * @param description
      * @param args
+     * 
+     * @since 1.0.0
      */
     public void addExample(String description, String[] args) {
         examples.add(new ExampleCommand(description, args));
     }
 
-    public int exampleCount() {
-        return examples.size();
+    /**
+     * @param args
+     * 
+     * @since 1.0.0
+     */
+    public void addExample(String[] args) {
+        addExample(null, args);
     }
 
-    public ExampleCommand getExample(int index) {
-        if (examples.size() <= index) {
-            return null;
-        }
-        String[] args = new String[examples.get(index).args.length];
-        System.arraycopy(examples.get(index).args, 0, args, 0, args.length);
-        return new ExampleCommand(examples.get(index).description, args);
-    }
-
+    /**
+     * @param option
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public void addOption(Option option) throws OptionException {
         Character ch = option.character;
         String name = option.name;
@@ -284,6 +315,16 @@ public class ImperioApp {
         }
     }
 
+    /**
+     * @param character
+     * 
+     * @return {@code true} if this app contains an option assigned to the given
+     *         character, else {@code false}
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public boolean containsOption(Character character) throws OptionException {
         if ((character != null)) {
             Iterator<OptionIndex> iter = getOptionIndeces();
@@ -297,10 +338,20 @@ public class ImperioApp {
         return false;
     }
 
+    /**
+     * @param index
+     * 
+     * @return {@code true} if this app contains an option assigned to the given
+     *         index, else {@code false}
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public boolean containsOption(OptionIndex index) throws OptionException {
         /*
          * We can't just check if the Map contains this index, because it's
-         * a hash map, and the hashes may not match even when the indeces do
+         * a hash map, and the hashes may not match even when the indices do
          * (e.g. index A contains the name and index B contains both the name
          * and the character).
          */
@@ -313,6 +364,16 @@ public class ImperioApp {
         return false;
     }
 
+    /**
+     * @param name
+     * 
+     * @return {@code true} if this app contains an option assigned to the given
+     *         long-form name, esle {@code false}
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public boolean containsOption(String name) throws OptionException {
         if ((name != null)) {
             Iterator<OptionIndex> iter = getOptionIndeces();
@@ -326,6 +387,39 @@ public class ImperioApp {
         return false;
     }
 
+    /**
+     * @return the number of example commands this app contains
+     * 
+     * @since 1.0.0
+     */
+    public int exampleCount() {
+        return examples.size();
+    }
+
+    /**
+     * @param index
+     * 
+     * @return the example command at the given index if it exists, else
+     *         {@code null}
+     * 
+     * @since 1.0.0
+     */
+    public ExampleCommand getExample(int index) {
+        if (examples.size() <= index) {
+            return null;
+        }
+        String[] args = new String[examples.get(index).args.length];
+        System.arraycopy(examples.get(index).args, 0, args, 0, args.length);
+        return new ExampleCommand(examples.get(index).description, args);
+    }
+
+    /**
+     * @return the help text
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public String getHelpString() throws OptionException {
         if (helpStr == null) {
             helpStr = help.getHelp(this);
@@ -333,6 +427,14 @@ public class ImperioApp {
         return helpStr;
     }
 
+    /**
+     * @param character
+     * 
+     * @return the option assigned to the given character if it exists, else
+     *         {@code null}
+     * 
+     * @since 1.0.0
+     */
     public Option getOption(Character character) {
         Iterator<OptionIndex> iter = optionsByIndeces.keySet().iterator();
         while (iter.hasNext()) {
@@ -344,10 +446,26 @@ public class ImperioApp {
         return null;
     }
 
+    /**
+     * @param index
+     * 
+     * @return the option assigned to the given index, if it exists, else
+     *         {@code null}
+     * 
+     * @since 1.0.0
+     */
     public Option getOption(OptionIndex index) {
         return optionsByIndeces.get(index);
     }
 
+    /**
+     * @param name
+     * 
+     * @return the option assigned to the given long-form name if it exists,
+     *         else {@code null}
+     *
+     * @since 1.0.0
+     */
     public Option getOption(String name) {
         Iterator<OptionIndex> iter = optionsByIndeces.keySet().iterator();
         while (iter.hasNext()) {
@@ -359,10 +477,22 @@ public class ImperioApp {
         return null;
     }
 
+    /**
+     * @return an iterator for the indices of all the options in the current app
+     * 
+     * @since 1.0.0
+     */
     public ListIterator<OptionIndex> getOptionIndeces() {
         return optionIndeces.listIterator();
     }
 
+    /**
+     * @return the usage text
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
     public String getUsageString() throws OptionException {
         if (usageStr == null) {
             usageStr = usageGen.getUsage(this);
@@ -381,6 +511,8 @@ public class ImperioApp {
      * @throws OptionException
      * 
      * @see {@link #processArgs(String[], StringArrContainer)}
+     * 
+     * @since 1.0.0
      */
     public boolean processArgs(String[] args) throws OptionException {
         return processArgs(args, null);
@@ -401,6 +533,8 @@ public class ImperioApp {
      * @throws OptionException
      *             If an error occurs and the error handler is configured to
      *             throw exceptions.
+     * 
+     * @since 1.0.0
      */
     public boolean processArgs(String[] args, StringArrContainer sac)
             throws OptionException {
@@ -426,7 +560,7 @@ public class ImperioApp {
                         argi + 1, args.length, arg);
                 break;
             } else if (arg.equals("-")) {
-                errorHandler.warn(
+                errorHandler.warn(getUsageString(),
                         "Hyphen(s) without option at option %d: \'%s\'", argi,
                         arg);
                 continue argloop;
@@ -550,7 +684,7 @@ public class ImperioApp {
                     oldVal = opt.getValue();
 
                     if (opt.deprecated) {
-                        errorHandler.warn("Using deprecated option: %s",
+                        errorHandler.warn(getUsageString(), "Using deprecated option: %s",
                                 opt.getInvocation());
                     }
 
@@ -572,6 +706,17 @@ public class ImperioApp {
                         opt.setValue(args[++argi]);
                         break;
                     case CUSTOM:
+                        if (args.length <= argi + 1) {
+                            break;
+                        }
+                        if (args[argi + 1].startsWith("-")) {
+                            errorHandler.warn(getUsageString(),
+                                    "Value for \'%s\' (\'%s\') begins with hyphen. "
+                                            + "Treating this %s option as arg-less.",
+                                    args[argi], args[argi + 1], opt.type);
+                            break;
+                        }
+                        opt.setValue(args[++argi]);
                         break;
                     case FLAG:
                         opt.setValue(true);

@@ -1,24 +1,104 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2018 by Andrew Felsher
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.imperio;
 
+import java.io.File;
+
+/**
+ * @author afelsher
+ *
+ * @since 1.0.0
+ */
 public class Option {
 
-    public static Option generate(OptionSpec spec) {
+    /**
+     * @param type
+     * @param value
+     * 
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    static Object checkValue(OptionType type, Object value) throws OptionException {
+        if (value != null) {
+            switch (type) {
+            case ARG:
+                if (!(value instanceof String)) {
+                    wrongValueType(value.getClass(), String.class);
+                }
+                break;
+            case FLAG:
+                if (!(value instanceof Boolean)) {
+                    wrongValueType(value.getClass(), Boolean.class);
+                }
+                break;
+            case DECREMENTER:
+            case INCREMENTER:
+                if (!(value instanceof Integer) && !(value instanceof Long)) {
+                    wrongValueType(value.getClass(), Integer.class);
+                }
+                break;
+            case CUSTOM:
+            default:
+                break;
+            }
+        }
+        return value;
+    }
+
+    /**
+     * @param spec
+     * 
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public static Option generate(OptionSpec spec) throws OptionException {
         spec = new OptionSpec(spec);
         if (spec.defaultValue == null) {
             switch (spec.type) {
             case FLAG:
                 if (spec.linkOption != null) {
-                    spec.defaultValue = !(boolean) spec.linkOption.defaultValue;
+                    spec.defaultValue = checkValue(spec.type,
+                            !spec.linkOption.getDefaultValueBoolean());
                 } else {
-                    spec.defaultValue = OptionSpec.DEFAULT_DEFAULT_VALUE_FLAG;
+                    spec.defaultValue = checkValue(spec.type,
+                            OptionSpec.DEFAULT_DEFAULT_VALUE_FLAG);
                 }
                 break;
             case DECREMENTER:
             case INCREMENTER:
                 if (spec.linkOption != null) {
-                    spec.defaultValue = spec.linkOption.defaultValue;
+                    spec.defaultValue = checkValue(spec.type,
+                            spec.linkOption.getDefaultValueInt());
                 } else {
-                    spec.defaultValue = OptionSpec.DEFAULT_DEFAULT_VALUE_INCR;
+                    spec.defaultValue = checkValue(spec.type,
+                            OptionSpec.DEFAULT_DEFAULT_VALUE_FLAG);
                 }
                 break;
             case ARG:
@@ -27,25 +107,7 @@ public class Option {
                 break;
             }
         } else {
-            switch (spec.type) {
-            case FLAG:
-                if (!Boolean.class
-                        .isAssignableFrom(spec.defaultValue.getClass())) {
-                    // TODO Warning
-                }
-                break;
-            case DECREMENTER:
-            case INCREMENTER:
-                if (!Integer.class
-                        .isAssignableFrom(spec.defaultValue.getClass())) {
-                    // TODO Warning
-                }
-                break;
-            case ARG:
-            case CUSTOM:
-            default:
-                break;
-            }
+            spec.defaultValue = checkValue(spec.type, spec.defaultValue);
         }
 
         if ((spec.type == OptionType.ARG) && (spec.valPlaceholder == null)) {
@@ -60,10 +122,40 @@ public class Option {
         return opt;
     }
 
+    /**
+     * @param clazz1
+     * @param clazz2
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    private static void wrongDefaultValueType(Class<?> clazz1, Class<?> clazz2)
+            throws OptionException {
+        OptionException e = new OptionException("Default value is a "
+                + clazz1.getSimpleName() + ", not a " + clazz2.getSimpleName());
+        throw e;
+    }
+
+    /**
+     * @param clazz1
+     * @param clazz2
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    private static void wrongValueType(Class<?> clazz1, Class<?> clazz2)
+            throws OptionException {
+        OptionException e = new OptionException("Value is a "
+                + clazz1.getSimpleName() + ", not a " + clazz2.getSimpleName());
+        throw e;
+    }
+
     public final boolean auto;
     protected final OptionCallback callback;
     public final Character character;
-    public final Object defaultValue;
+    private final Object defaultValue;
     public final boolean deprecated;
     public final String description;
     Option linkOption = null;
@@ -74,6 +166,11 @@ public class Option {
     public final String valPlaceholder;
     private Object value = null;
 
+    /**
+     * @param spec
+     * 
+     * @since 1.0.0
+     */
     Option(OptionSpec spec) {
         this.auto = spec.auto;
         this.callback = spec.callback;
@@ -88,33 +185,226 @@ public class Option {
         this.valPlaceholder = spec.valPlaceholder;
     }
 
-    public Object getValue() {
-        return value;
+    /**
+     * @return
+     * 
+     * @since 1.0.0
+     */
+    public Object getDefaultValue() {
+        return defaultValue;
     }
 
-    void setValue(Object value) {
-        this.value = value;
-    }
-
-    public boolean isSet() {
-        if (value == null) {
-            return false;
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public Boolean getDefaultValueBoolean() throws OptionException {
+        if (defaultValue == null) {
+            return null;
         }
-        if (!Boolean.class.isAssignableFrom(value.getClass())) {
-            return false;
+        if (defaultValue instanceof Boolean) {
+            return (boolean) defaultValue;
         }
-        return (boolean) value;
+        wrongDefaultValueType(value.getClass(), Boolean.class);
+        return null;
     }
 
-    public boolean isProvided() {
-        return provided;
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public File getDefaultValueFile() throws OptionException {
+        if (defaultValue == null) {
+            return null;
+        }
+        if (defaultValue instanceof File) {
+            return (File) defaultValue;
+        }
+        if (defaultValue instanceof String) {
+            return new File((String) defaultValue);
+        }
+        wrongDefaultValueType(value.getClass(), File.class);
+        return null;
     }
 
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public Integer getDefaultValueInt() throws OptionException {
+        if (defaultValue == null) {
+            return null;
+        }
+        if (defaultValue instanceof Integer) {
+            return (int) defaultValue;
+        }
+        wrongDefaultValueType(value.getClass(), Integer.class);
+        return null;
+    }
+
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public String getDefaultValueString() throws OptionException {
+        if (defaultValue == null) {
+            return null;
+        }
+        if (defaultValue instanceof String) {
+            return (String) defaultValue;
+        }
+        wrongDefaultValueType(value.getClass(), String.class);
+        return null;
+    }
+
+    /**
+     * @return
+     * 
+     * @since 1.0.0
+     */
     public String getInvocation() {
         if (name != null) {
             return "--" + name;
         }
         return "-" + character;
+    }
+
+    /**
+     * @return
+     * 
+     * @since 1.0.0
+     */
+    public Object getValue() {
+        return value;
+    }
+
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public Boolean getValueBoolean() throws OptionException {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Boolean) {
+            return (boolean) value;
+        }
+        wrongValueType(value.getClass(), Boolean.class);
+        return null;
+    }
+
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public File getValueFile() throws OptionException {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof File) {
+            return (File) value;
+        }
+        if (value instanceof String) {
+            return new File((String) value);
+        }
+        wrongValueType(value.getClass(), File.class);
+        return null;
+    }
+
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public Integer getValueInt() throws OptionException {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Integer) {
+            return (int) value;
+        }
+        wrongValueType(value.getClass(), Integer.class);
+        return null;
+    }
+
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public String getValueString() throws OptionException {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof String) {
+            return (String) value;
+        }
+        wrongValueType(value.getClass(), String.class);
+        return null;
+    }
+
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public boolean isFlagSet() throws OptionException {
+        if (value == null) {
+            return false;
+        }
+        if (type != OptionType.FLAG) {
+            return false;
+        }
+        return getValueBoolean();
+    }
+
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public boolean isProvided() {
+        return provided;
+    }
+
+    /**
+     * @return
+     * 
+     * @throws OptionException
+     * 
+     * @since 1.0.0
+     */
+    public void setValue(Object value) throws OptionException {
+        if (value != null) {
+            checkValue(this.type, value);
+        }
+        this.value = value;
     }
 
 }
