@@ -1,14 +1,18 @@
 apply plugin: 'java'
 
+import java.text.SimpleDateFormat;
+
 // Set the version here!
 def versionMain = '0.0.0'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def dirBuild = 'build'
-def dirSrc   = 'src'
-def libName  = "Imperio"
+def dirBuild     = 'build'
+//def dirJAPI      = 'java8-181-api'
+def dirSrc       = 'src'
+def libName      = 'Imperio'
+def versionFull  = ''
 
 def dirDocumenterPkg = dirSrc + '/com/imperio'
 def dirLibs          = dirBuild + '/libs'
@@ -21,28 +25,56 @@ sourceSets {
     }
 }
 
-repositories {
-    mavenCentral()
-
-    flatDir {
-        dirs 'libs'
-    }
-}
-
-dependencies {
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-exec
-    compile group: 'org.apache.commons', name: 'commons-exec', version: '1.3'
-}
-
 compileJava.group 'Build'
 compileTestJava.group 'Build'
+
+task setup() {
+    def dt = new Date();
+    def df = new SimpleDateFormat('yyyy-MM-dd-HH-mm-ss')
+
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+
+    versionFull = versionMain + '.' + df.format(dt)
+}
+
+build.dependsOn setup
 
 jar {
     baseName = libName
     version = versionMain
 }
 
-task release(dependsOn: [build]) {
+javadoc {
+    def df = new SimpleDateFormat('yyyy')
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+    def year = df.format(new Date())
+
+    options.addStringOption("doctitle", "Imperio " + versionMain + " JavaDoc")
+    options.addStringOption("footer", "Imperio " + versionFull + " Copyright " +
+        "(c)  2018-" + year + " by Andrew Felsher")
+    options.addStringOption("header", "Imperio " + versionMain)
+    // TODO Fix links to JRE documentation
+    // TODO link to JRE used to build, not a hard-coded JRE
+    options.addStringOption("link", "http://docs.oracle.com/javase/8/docs/api/")
+    //options.addStringOption("linkoffline", "http://docs.oracle.com/javase/8/docs/api/ " + dirJAPI)
+    options.addStringOption("linksource")
+    options.addStringOption("protected")
+    options.addStringOption("sourcetab", "4")
+    options.addStringOption("verbose")
+    options.addStringOption("windowtitle", "CiscoJ " + versionMain +
+        " API Documentation")
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    description = "Package the generated Javadoc into a jar."
+    group 'Packaging'
+
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+    baseName = libName
+}
+
+task release(dependsOn: [build, javadocJar]) {
     description = "Create the release jar file."
     group 'Release'
 

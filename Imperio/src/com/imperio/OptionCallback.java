@@ -32,11 +32,18 @@ public interface OptionCallback {
 
     /**
      * @param impApp
+     *            Imperio application instance
      * @param opt
+     *            the last option that was processed
      * @param oldVal
+     *            the value of the provided option before processing the latest
+     *            instance of it
+     * 
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public void callback(ImperioApp impApp, Option opt, Object oldVal);
+    public void callback(ImperioApp impApp, Option opt, Object oldVal)
+            throws ImperioException;
 
 }

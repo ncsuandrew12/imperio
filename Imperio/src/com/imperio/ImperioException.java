@@ -24,42 +24,55 @@
 package com.imperio;
 
 /**
- * 
- * 
  * @author afelsher
  *
  * @since 1.0.0
  */
-public class ErrorHandlerExit extends ErrorHandlerPrint {
+public class ImperioException extends Exception {
+
+    private static final long serialVersionUID = 984789956991621020L;
 
     /**
+     * @param format printf format string
+     * @param args
+     * 
      * @since 1.0.0
      */
-    @Override
-    public void err(ErrorType err, ImperioApp impApp, String format,
-            Object... args) throws InternalImperioException {
-        super.err(err, impApp, format, args);
-        System.exit(err.code);
+    public ImperioException(String format, Object... args) {
+        this((Throwable) null, (String) null, format, args);
     }
 
     /**
+     * @param t throwable
+     * 
      * @since 1.0.0
      */
-    @Override
-    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex)
-            throws InternalImperioException {
-        super.err(err, impApp, ex);
-        System.exit(err.code);
+    public ImperioException(Throwable t) {
+        super(t);
     }
 
     /**
+     * @param t throwable
+     * @param format printf format string
+     * @param args
+     * 
      * @since 1.0.0
      */
-    @Override
-    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex,
-            String format, Object... args) throws InternalImperioException {
-        super.err(err, impApp, ex, format, args);
-        System.exit(err.code);
+    public ImperioException(Throwable t, String format, Object... args) {
+        this(t, (String) null, format, args);
+    }
+
+    /**
+     * @param t throwable
+     * @param prefix
+     * @param format printf format string
+     * @param args
+     * 
+     * @since 1.0.0
+     */
+    public ImperioException(Throwable t, String prefix, String format,
+            Object... args) {
+        super((prefix == null ? "" : prefix) + String.format(format, args), t);
     }
 
 }

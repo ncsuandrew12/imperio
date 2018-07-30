@@ -40,15 +40,15 @@ public abstract class HelpGen {
     }
 
     /**
-     * @param impApp
+     * @param impApp Imperio application instance
      * 
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public String getHelp(ImperioApp impApp) throws OptionException {
+    public String getHelp(ImperioApp impApp) throws ImperioException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         try {
@@ -61,25 +61,25 @@ public abstract class HelpGen {
     }
 
     /**
-     * @param impApp
+     * @param impApp Imperio application instance
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public void printHelp(ImperioApp impApp) throws OptionException {
+    public void printHelp(ImperioApp impApp) throws ImperioException {
         printHelp(System.out, impApp);
     }
 
     /**
      * @param ps
-     * @param impApp
+     * @param impApp Imperio application instance
      * 
-     * @throws OptionException
+     * @throws ImperioException 
      * 
      * @since 1.0.0
      */
     public abstract void printHelp(PrintStream ps, ImperioApp impApp)
-            throws OptionException;
+            throws ImperioException;
 
 }

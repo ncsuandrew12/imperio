@@ -24,7 +24,7 @@
 package com.imperio.examples.rush;
 
 import com.imperio.Option;
-import com.imperio.OptionException;
+import com.imperio.ImperioException;
 import com.imperio.OptionSpec;
 import com.imperio.OptionType;
 
@@ -94,7 +94,7 @@ public enum Parameter {
             }
             try {
                 parms[i].opt = Option.generate(optSpec);
-            } catch (OptionException e) {
+            } catch (ImperioException e) {
                 throw new RuntimeException(e);
             }
         }

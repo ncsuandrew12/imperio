@@ -50,30 +50,6 @@ Copy `build/libs/Imperio.jar` (or the version-name copy) to wherever you need it
 
 Be sure to add this jar to your classpath and/or Ant/Gradle/Maven files.
 
-## 4 - Copy/Install Apache Commons Exec
-
-Imperio relies on the Apache Commons Exec library to generate the example commands.
-
-You have a couple of options for using this library.
-
-Be sure to add the Apache jar to your classpath and/or Ant/Gradle/Maven files as necessary.
-
-Once that's done, all you need to do is import Imperio packages/classes and get coding.
-
-Imperio is developed using Apache Commons Exec 1.3. However, Imperio uses a very small subset of the API, and therefore may be usable with various other ACE versions, although this is untested.
-
-### 4-1 - Use Included Jar
-
-For convenience, a copy of the necessary jar is included at [libs/commons-exec-1.3.jar](libs/commons-exec-1.3.jar). You may copy this jar wherever you need it (likely the same location as the Imperio jar).
-
-### 4-2 - Download Apache Library
-
-You can also download the jars yourself from the Apache website.
-
-### 4-3 - Reference ACE in Build Config
-
-If your build process uses Gradle or Maven, you may add a reference to [Apache Commons Exec](https://mvnrepository.com/artifact/org.apache.commons/commons-exec) in your config file. See Imperio's [build.gradle](build.gradle) for a Gradle example.
-
 # Examples
 
 For reference, there are example applications and Eclipse projects located here:
