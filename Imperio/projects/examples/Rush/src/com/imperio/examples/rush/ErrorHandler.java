@@ -24,6 +24,7 @@
 package com.imperio.examples.rush;
 
 import com.imperio.ErrorType;
+import com.imperio.ImperioApp;
 import com.imperio.OptionException;
 
 public class ErrorHandler implements com.imperio.ErrorHandler {
@@ -31,8 +32,8 @@ public class ErrorHandler implements com.imperio.ErrorHandler {
     protected ErrorType firstError = null;
 
     @Override
-    public void err(ErrorType err, String usage, String format, Object... args)
-            throws OptionException {
+    public void err(ErrorType err, ImperioApp impApp, String format,
+            Object... args) throws OptionException {
         if (firstError == null) {
             firstError = err;
         }
@@ -43,7 +44,7 @@ public class ErrorHandler implements com.imperio.ErrorHandler {
         System.err.println(
                 "###############################################################################");
         if (err != ErrorType.UNKNOWN_OPTION) {
-            System.err.print(usage);
+            System.err.print(impApp);
             System.err.println();
             System.err.printf(err.msg);
             System.err.println();
@@ -55,15 +56,15 @@ public class ErrorHandler implements com.imperio.ErrorHandler {
     }
 
     @Override
-    public void err(ErrorType err, String usage, Throwable t)
+    public void err(ErrorType err, ImperioApp impApp, Throwable t)
             throws OptionException {
-        err(err, usage, t, null);
+        err(err, impApp, t, null);
     }
 
     @Override
-    public void err(ErrorType err, String usage, Throwable t, String format,
-            Object... args) throws OptionException {
-        err(err, usage, format, args);
+    public void err(ErrorType err, ImperioApp impApp, Throwable t,
+            String format, Object... args) throws OptionException {
+        err(err, impApp, format, args);
         if (t != null) {
             t.printStackTrace(System.err);
             System.err.println();
@@ -76,7 +77,7 @@ public class ErrorHandler implements com.imperio.ErrorHandler {
     }
 
     @Override
-    public void warn(String usage, String format, Object... args) {
+    public void warn(ImperioApp impApp, String format, Object... args) {
         System.out.println(
                 "###############################################################################");
         System.out.println(

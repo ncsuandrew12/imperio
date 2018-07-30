@@ -34,9 +34,9 @@ public class ErrorHandlerExit extends ErrorHandlerPrint {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, String usage, String format, Object... args)
+    public void err(ErrorType err, ImperioApp impApp, String format, Object... args)
             throws OptionException {
-        super.err(err, usage, format, args);
+        super.err(err, impApp, format, args);
         System.exit(err.code);
     }
 
@@ -44,9 +44,9 @@ public class ErrorHandlerExit extends ErrorHandlerPrint {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, String usage, Throwable t)
+    public void err(ErrorType err, ImperioApp impApp, Throwable t)
             throws OptionException {
-        super.err(err, usage, t);
+        super.err(err, impApp, t);
         System.exit(err.code);
     }
 
@@ -54,9 +54,9 @@ public class ErrorHandlerExit extends ErrorHandlerPrint {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, String usage, Throwable t, String format,
+    public void err(ErrorType err, ImperioApp impApp, Throwable t, String format,
             Object... args) throws OptionException {
-        super.err(err, usage, t, format, args);
+        super.err(err, impApp, t, format, args);
         System.exit(err.code);
     }
 

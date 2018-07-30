@@ -55,7 +55,7 @@ public interface ErrorHandler {
 
     /**
      * @param err
-     * @param usage
+     * @param impApp
      * @param format
      * @param args
      * 
@@ -63,24 +63,24 @@ public interface ErrorHandler {
      * 
      * @since 1.0.0
      */
-    public void err(ErrorType err, String usage, String format, Object... args)
-            throws OptionException;
+    public void err(ErrorType err, ImperioApp impApp, String format,
+            Object... args) throws OptionException;
 
     /**
      * @param err
-     * @param usage
+     * @param impApp
      * @param t
      * 
      * @throws OptionException
      * 
      * @since 1.0.0
      */
-    public void err(ErrorType err, String usage, Throwable t)
+    public void err(ErrorType err, ImperioApp impApp, Throwable t)
             throws OptionException;
 
     /**
      * @param err
-     * @param usage
+     * @param impApp
      * @param t
      * @param format
      * @param args
@@ -89,7 +89,7 @@ public interface ErrorHandler {
      * 
      * @since 1.0.0
      */
-    public void err(ErrorType err, String usage, Throwable t, String format,
+    public void err(ErrorType err, ImperioApp impApp, Throwable t, String format,
             Object... args) throws OptionException;
 
     /**
@@ -100,12 +100,12 @@ public interface ErrorHandler {
     public ErrorType firstError();
 
     /**
-     * @param usage
+     * @param impApp
      * @param format
      * @param args
      * 
      * @since 1.0.0
      */
-    public void warn(String usage, String format, Object... args);
+    public void warn(ImperioApp impApp, String format, Object... args);
 
 }

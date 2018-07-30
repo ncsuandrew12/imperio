@@ -36,25 +36,25 @@ public class ErrorHandlerNull implements ErrorHandler {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, String usage, String format, Object... args)
+    public void err(ErrorType err, ImperioApp impApp, String format, Object... args)
             throws OptionException {
-        err(err, usage, null, format, args);
+        err(err, impApp, null, format, args);
     }
 
     /**
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, String usage, Throwable t)
+    public void err(ErrorType err, ImperioApp impApp, Throwable t)
             throws OptionException {
-        err(err, usage, t, null);
+        err(err, impApp, t, null);
     }
 
     /**
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, String usage, Throwable t, String format,
+    public void err(ErrorType err, ImperioApp impApp, Throwable t, String format,
             Object... args) throws OptionException {
         if (firstError == null) {
             firstError = err;
@@ -73,7 +73,7 @@ public class ErrorHandlerNull implements ErrorHandler {
      * @since 1.0.0
      */
     @Override
-    public void warn(String usage, String format, Object... args) {
+    public void warn(ImperioApp impApp, String format, Object... args) {
     }
 
 }

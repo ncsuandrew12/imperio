@@ -36,7 +36,7 @@ public class ImperioAppSpec {
     public static final ErrorHandler DEFAULT_ERROR_HANDLER =
             new ErrorHandlerException();
     public static final String DEFAULT_HELP_ADDENDA = null;
-    public static final HelpGen DEFAULT_HELP_GEN = new HelpGen();
+    public static final HelpGen DEFAULT_HELP_GEN = new HelpGenDefault();
     public static final OptionHelp DEFAULT_HELP_OPT = OptionHelp.generate();
     public static final String DEFAULT_INVOCATION = null;
     public static final ImpLogger DEFAULT_LOGGER = new ImpLoggerNull();

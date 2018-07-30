@@ -36,12 +36,12 @@ public class ErrorHandlerPrint implements ErrorHandler {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, String usage, String format, Object... args)
+    public void err(ErrorType err, ImperioApp impApp, String format, Object... args)
             throws OptionException {
         if (firstError == null) {
             firstError = err;
         }
-        System.err.print(usage);
+        System.err.print(impApp.getUsageString());
         System.err.println();
         System.err.printf(err.msg);
         System.err.println();
@@ -55,18 +55,18 @@ public class ErrorHandlerPrint implements ErrorHandler {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, String usage, Throwable t)
+    public void err(ErrorType err, ImperioApp impApp, Throwable t)
             throws OptionException {
-        err(err, usage, t, null);
+        err(err, impApp, t, null);
     }
 
     /**
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, String usage, Throwable t, String format,
+    public void err(ErrorType err, ImperioApp impApp, Throwable t, String format,
             Object... args) throws OptionException {
-        err(err, usage, format, args);
+        err(err, impApp, format, args);
         if (t != null) {
             t.printStackTrace(System.err);
             System.err.println();
@@ -85,7 +85,7 @@ public class ErrorHandlerPrint implements ErrorHandler {
      * @since 1.0.0
      */
     @Override
-    public void warn(String usage, String format, Object... args) {
+    public void warn(ImperioApp impApp, String format, Object... args) {
         if (format == null) {
             (new NullPointerException("null format string"))
                     .printStackTrace(System.out);
