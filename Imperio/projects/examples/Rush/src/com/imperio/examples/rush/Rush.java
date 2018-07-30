@@ -26,14 +26,14 @@ package com.imperio.examples.rush;
 import com.imperio.ImpLoggerPrint;
 import com.imperio.ImperioApp;
 import com.imperio.ImperioAppSpec;
-import com.imperio.OptionException;
+import com.imperio.ImperioException;
 import com.imperio.OptionHelp;
 import com.imperio.OptionSpec;
 import com.imperio.UsageGenChars;
 
 public class Rush {
 
-    public static void main(String[] args) throws OptionException {
+    public static void main(String[] args) throws ImperioException {
 
         OptionSpec optSpec = OptionHelp.generateSpec();
         optSpec.character = 'h';
@@ -49,7 +49,7 @@ public class Rush {
                   "Do stuff with The Trees. Some wrappable text: The Wheel of Time turns, "
                 + "and Ages come and pass, leaving memories that become legend. Legend "
                 + "fades to myth, and even myth is long forgotten when the Age that gave "
-                + "it birth comes again.  In one Age, called the third age by some, an Age "
+                + "it birth comes again. In one Age, called the third age by some, an Age "
                 + "yet to come, an age long past, a wind rose in the Mountains of Mist. "
                 + "The wind was not the beginning. There are neither beginnings or endings "
                 + "to the turning of the Wheel of Time. But it was a beginning.    hyphen-"
@@ -61,7 +61,7 @@ public class Rush {
                 +       "\t<-tab ................................................. tab\t"
                 +         "<-tab\n"
                 + "long_text_abcdefghijklmnopqrstuvwxyz0123456789_abcdefghijklmnopqrstuvwxyz0123456789 "
-                + "long_text_ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
+                + "short_text long_text_ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
                 + "verical" + ((char) 0x0B)
                 +        "tab ....................................................... wrap "
                 + "around";
@@ -83,7 +83,7 @@ public class Rush {
         impApp.addExample(new String[] {
                 Parameter.SECOND_VERSE.getOpt().getInvocation(),
                 Parameter.LAST_LINE.getOpt().getInvocation(),
-                "Death is preferable to communism.",
+                "\"Death is preferable to communism.\"",
                 "-vvvvvvqqqqqvvv" });
         impApp.addExample("Showcase error-correcting argument suggestions:", new String[] {
                 Parameter.LAST_LINE.getOpt().getInvocation(),
@@ -129,11 +129,11 @@ public class Rush {
         System.out.println("And saw");
 
         System.out.println();
-        System.out.println(Parameter.LAST_LINE.getOpt().getValue());
+        System.out.println(Parameter.LAST_LINE.getOpt().getValueString());
 
         System.out.println();
         System.out.printf("Verbosity: %d\n",
-                Parameter.VERBOSITY.getOpt().getValue());
+                Parameter.VERBOSITY.getOpt().getValueInt());
         System.out.println();
     }
 

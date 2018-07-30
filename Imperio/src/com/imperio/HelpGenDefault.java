@@ -26,8 +26,6 @@ package com.imperio;
 import java.io.PrintStream;
 import java.util.ListIterator;
 
-import org.apache.commons.exec.CommandLine;
-
 /**
  * @author afelsher
  *
@@ -59,14 +57,14 @@ public class HelpGenDefault extends HelpGen {
 
     /**
      * @param ps
-     * @param impApp
+     * @param impApp Imperio application instance
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
     public void printHelp(PrintStream ps, ImperioApp impApp)
-            throws OptionException {
+            throws ImperioException {
         String indent = "        ";
         int indentLen = indent.length();
 
@@ -114,9 +112,15 @@ public class HelpGenDefault extends HelpGen {
                 ps.println();
                 wrap(ps, impApp, indent + indent, 2 * indentLen, opt.description);
             }
-            if ((opt.type == OptionType.FLAG) && (opt.getDefaultValue() != null)
-                    && (opt.getDefaultValueBoolean())) {
-                ps.printf(" (default)");
+            try {
+                if ((opt.type == OptionType.FLAG)
+                        && (opt.getDefaultValue() != null)
+                        && (opt.getDefaultValueBoolean())) {
+                    ps.printf(" (default)");
+                }
+            } catch (ImperioException e) {
+                impApp.errorHandler.err(ErrorType.IMPERIO, impApp,
+                        new InternalImperioException(e));
             }
             ps.println();
             ps.println();
@@ -128,7 +132,6 @@ public class HelpGenDefault extends HelpGen {
         for (int i = 0; i < impApp.exampleCount(); i++) {
             ExampleCommand cmd = null;
             String[] eArgs = null;
-            CommandLine cl = null;
 
             if (i == 0) {
                 ps.println("EXAMPLES");
@@ -138,25 +141,11 @@ public class HelpGenDefault extends HelpGen {
 
             cmd = impApp.getExample(i);
             eArgs = cmd.args;
-            cl = new CommandLine(impApp.invocation);
 
             if (cmd.description != null) {
                 wrap(ps, impApp, indent, indentLen, cmd.description);
                 ps.print(indent);
             }
-
-            /*
-             * Escape non-space whitespace characters and pass resulting string
-             * to shell-character escaper.
-             */
-            for (int a = 0; a < eArgs.length; a++) {
-                cl.addArgument(eArgs[a]);
-            }
-
-            /*
-             * Get the escaped arguments.
-             */
-            eArgs = cl.getArguments();
 
             /*
              * Print the example invocation.
@@ -205,12 +194,12 @@ public class HelpGenDefault extends HelpGen {
      * @param indentLen
      * @param str
      * 
-     * @throws OptionException
+     * @throws InternalImperioException
      * 
      * @since 1.0.0
      */
     private void wrap(PrintStream ps, ImperioApp impApp, String indent,
-            int indentLen, String str) throws OptionException {
+            int indentLen, String str) throws InternalImperioException {
         int wrapWidth = 80 -indentLen;
         
         if (str.length() <= wrapWidth / 2) {

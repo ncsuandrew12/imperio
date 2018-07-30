@@ -30,7 +30,7 @@ import java.io.UnsupportedEncodingException;
 import com.imperio.ErrorHandlerNull;
 import com.imperio.ImperioApp;
 import com.imperio.ImperioAppSpec;
-import com.imperio.OptionException;
+import com.imperio.ImperioException;
 import com.imperio.OptionHelp;
 import com.imperio.OptionSpec;
 import com.imperio.StringArrContainer;
@@ -45,12 +45,12 @@ public class Echo {
     }
 
     public static void main(String[] args)
-            throws OptionException, UnsupportedEncodingException {
+            throws ImperioException, UnsupportedEncodingException {
         new Echo().run(args);
     }
 
     public void run(String[] args)
-            throws OptionException, UnsupportedEncodingException {
+            throws ImperioException, UnsupportedEncodingException {
 
         OptionSpec optSpec = OptionHelp.generateSpec();
         optSpec.character = 'h';

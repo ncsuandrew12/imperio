@@ -24,6 +24,22 @@
 package com.imperio;
 
 /**
+ * Implementations of this class handle errors and warnings which may occur
+ * within the Imperio library. Developers may create their own implementations,
+ * or use the built-in options.
+ * 
+ * {@link ErrorHandlerException} prints warnings to {@code System.out} and
+ * throws {@link ImperioException}s on errors
+ * 
+ * {@link ErrorHandlerExit} behaves the same as {@link ErrorHandlerPrint}, but
+ * exits with the given error type's code after printing.
+ * 
+ * {@link ErrorHandlerNull} silently ignores all warnings and errors, but does
+ * store the first error like the others.
+ * 
+ * {@link ErrorHandlerPrint} prints errors to {@code System.err} and prints
+ * warnings to {@code System.out}
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -32,42 +48,56 @@ public interface ErrorHandler {
 
     /**
      * @param err
+     *            error type
      * @param impApp
+     *            Imperio application instance
      * @param format
+     *            error message format string
      * @param args
+     *            error message printf args
      * 
-     * @throws OptionException
+     * @throws InternalImperioException
      * 
      * @since 1.0.0
      */
     public void err(ErrorType err, ImperioApp impApp, String format,
-            Object... args) throws OptionException;
+            Object... args) throws InternalImperioException;
 
     /**
      * @param err
+     *            error type
      * @param impApp
-     * @param t
+     *            Imperio application instance
+     * @param ex
+     *            exception
      * 
-     * @throws OptionException
+     * @throws InternalImperioException
      * 
      * @since 1.0.0
      */
-    public void err(ErrorType err, ImperioApp impApp, Throwable t)
-            throws OptionException;
+    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex)
+            throws InternalImperioException;
 
     /**
+     * Handle an error. Different sub-classes handle errors differently.
+     * 
      * @param err
+     *            error type
      * @param impApp
-     * @param t
+     *            Imperio application instance
+     * @param ex
+     *            exception
      * @param format
+     *            error message format string
      * @param args
+     *            error message printf args
      * 
-     * @throws OptionException
+     * @throws InternalImperioException
      * 
      * @since 1.0.0
      */
-    public void err(ErrorType err, ImperioApp impApp, Throwable t,
-            String format, Object... args) throws OptionException;
+    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex,
+            String format, Object... args) throws InternalImperioException;
 
     /**
      * @return the first error that occurred
@@ -78,8 +108,11 @@ public interface ErrorHandler {
 
     /**
      * @param impApp
+     *            Imperio application instance
      * @param format
+     *            format string
      * @param args
+     *            error message printf args
      * 
      * @since 1.0.0
      */

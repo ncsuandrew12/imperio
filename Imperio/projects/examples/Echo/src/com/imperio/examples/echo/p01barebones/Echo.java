@@ -26,12 +26,12 @@ package com.imperio.examples.echo.p01barebones;
 import com.imperio.ImperioApp;
 import com.imperio.ImperioAppSpec;
 import com.imperio.Option;
-import com.imperio.OptionException;
+import com.imperio.ImperioException;
 import com.imperio.OptionSpec;
 
 public class Echo {
 
-    public static void main(String[] args) throws OptionException {
+    public static void main(String[] args) throws ImperioException {
         OptionSpec optSpec = new OptionSpec();
 
         ImperioAppSpec iaSpec = new ImperioAppSpec();

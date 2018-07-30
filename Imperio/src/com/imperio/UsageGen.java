@@ -34,15 +34,15 @@ import java.io.PrintStream;
 public abstract class UsageGen {
 
     /**
-     * @param impApp
+     * @param impApp Imperio application instance
      * 
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public String getUsage(ImperioApp impApp) throws OptionException {
+    public String getUsage(ImperioApp impApp) throws ImperioException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         try {
@@ -55,25 +55,25 @@ public abstract class UsageGen {
     }
 
     /**
-     * @param impApp
+     * @param impApp Imperio application instance
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public void printUsage(ImperioApp impApp) throws OptionException {
+    public void printUsage(ImperioApp impApp) throws ImperioException {
         printUsage(System.out, impApp);
     }
 
     /**
      * @param ps
-     * @param impApp
+     * @param impApp Imperio application instance
      * 
-     * @throws OptionException
+     * @throws ImperioException 
      * 
      * @since 1.0.0
      */
     public abstract void printUsage(PrintStream ps, ImperioApp impApp)
-            throws OptionException;
+            throws ImperioException;
 
 }

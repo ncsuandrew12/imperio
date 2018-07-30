@@ -25,7 +25,8 @@ package com.imperio.examples.rush;
 
 import com.imperio.ErrorType;
 import com.imperio.ImperioApp;
-import com.imperio.OptionException;
+import com.imperio.ImperioException;
+import com.imperio.InternalImperioException;
 
 public class ErrorHandler implements com.imperio.ErrorHandler {
 
@@ -33,7 +34,7 @@ public class ErrorHandler implements com.imperio.ErrorHandler {
 
     @Override
     public void err(ErrorType err, ImperioApp impApp, String format,
-            Object... args) throws OptionException {
+            Object... args) throws InternalImperioException {
         if (firstError == null) {
             firstError = err;
         }
@@ -44,7 +45,11 @@ public class ErrorHandler implements com.imperio.ErrorHandler {
         System.err.println(
                 "###############################################################################");
         if (err != ErrorType.UNKNOWN_OPTION) {
-            System.err.print(impApp.getUsageString());
+            try {
+                System.err.print(impApp.getUsageString());
+            } catch (ImperioException e) {
+                e.printStackTrace(System.err);
+            }
             System.err.println();
             System.err.printf(err.msg);
             System.err.println();
@@ -56,17 +61,17 @@ public class ErrorHandler implements com.imperio.ErrorHandler {
     }
 
     @Override
-    public void err(ErrorType err, ImperioApp impApp, Throwable t)
-            throws OptionException {
-        err(err, impApp, t, null);
+    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex)
+            throws InternalImperioException {
+        err(err, impApp, ex, null);
     }
 
     @Override
-    public void err(ErrorType err, ImperioApp impApp, Throwable t,
-            String format, Object... args) throws OptionException {
+    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex,
+            String format, Object... args) throws InternalImperioException {
         err(err, impApp, format, args);
-        if (t != null) {
-            t.printStackTrace(System.err);
+        if (ex != null) {
+            ex.printStackTrace(System.err);
             System.err.println();
         }
     }

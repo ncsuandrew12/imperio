@@ -36,12 +36,16 @@ public class ErrorHandlerPrint implements ErrorHandler {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, ImperioApp impApp, String format, Object... args)
-            throws OptionException {
+    public void err(ErrorType err, ImperioApp impApp, String format,
+            Object... args) throws InternalImperioException {
         if (firstError == null) {
             firstError = err;
         }
-        System.err.print(impApp.getUsageString());
+        try {
+            System.err.print(impApp.getUsageString());
+        } catch (ImperioException e) {
+            e.printStackTrace(System.err);
+        }
         System.err.println();
         System.err.printf(err.msg);
         System.err.println();
@@ -55,20 +59,20 @@ public class ErrorHandlerPrint implements ErrorHandler {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, ImperioApp impApp, Throwable t)
-            throws OptionException {
-        err(err, impApp, t, null);
+    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex)
+            throws InternalImperioException {
+        err(err, impApp, ex, null);
     }
 
     /**
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, ImperioApp impApp, Throwable t, String format,
-            Object... args) throws OptionException {
+    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex,
+            String format, Object... args) throws InternalImperioException {
         err(err, impApp, format, args);
-        if (t != null) {
-            t.printStackTrace(System.err);
+        if (ex != null) {
+            ex.printStackTrace(System.err);
             System.err.println();
         }
     }

@@ -39,7 +39,7 @@ public class UsageGenChars extends UsageGen {
      */
     @Override
     public void printUsage(PrintStream ps, ImperioApp impApp)
-            throws OptionException {
+            throws ImperioException {
         boolean foundReqFlags = false;
         boolean foundOptFlags = false;
         StringWriter optArgs = null;
@@ -87,7 +87,7 @@ public class UsageGenChars extends UsageGen {
                     }
                     break;
                 default:
-                    throw new OptionException(
+                    throw new ImperioException(
                             "Unknown option type " + arg.type);
                 }
             } else {
@@ -115,7 +115,7 @@ public class UsageGenChars extends UsageGen {
                     }
                     break;
                 default:
-                    throw new OptionException(
+                    throw new ImperioException(
                             "Unknown option type " + arg.type);
                 }
             }
