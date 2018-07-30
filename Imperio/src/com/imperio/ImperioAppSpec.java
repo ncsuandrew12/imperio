@@ -60,11 +60,11 @@ public class ImperioAppSpec {
     public UsageGen usageGen = DEFAULT_USAGE_GEN;
 
     /**
-     * @throws OptionException
+     * @throws InternalImperioException
      * 
      * @since 1.0.0
      */
-    public ImperioAppSpec() throws OptionException {
+    public ImperioAppSpec() throws InternalImperioException {
         StackTraceElement[] ste = new Throwable().getStackTrace();
         String cn = ste[ste.length - 1].getClassName();
         int index = cn.lastIndexOf(".");
@@ -79,11 +79,11 @@ public class ImperioAppSpec {
     /**
      * @param spec
      * 
-     * @throws OptionException
+     * @throws InternalImperioException
      * 
      * @since 1.0.0
      */
-    public ImperioAppSpec(ImperioAppSpec spec) throws OptionException {
+    public ImperioAppSpec(ImperioAppSpec spec) throws InternalImperioException {
         this.author = spec.author;
         this.copyright = spec.copyright;
         this.description = spec.description;

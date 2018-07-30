@@ -28,7 +28,7 @@ import java.io.PrintStream;
 import com.imperio.HelpGen;
 import com.imperio.ImperioApp;
 import com.imperio.Option;
-import com.imperio.OptionException;
+import com.imperio.ImperioException;
 import com.imperio.OptionType;
 
 public class Help extends HelpGen {
@@ -38,7 +38,7 @@ public class Help extends HelpGen {
 
     @Override
     public void printHelp(PrintStream ps, ImperioApp impApp)
-            throws OptionException {
+            throws ImperioException {
         String indent = "  ";
 
         ps.print(impApp.getUsageString());

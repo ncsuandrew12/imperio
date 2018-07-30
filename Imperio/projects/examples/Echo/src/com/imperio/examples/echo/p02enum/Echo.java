@@ -25,11 +25,11 @@ package com.imperio.examples.echo.p02enum;
 
 import com.imperio.ImperioApp;
 import com.imperio.ImperioAppSpec;
-import com.imperio.OptionException;
+import com.imperio.ImperioException;
 
 public class Echo {
 
-    public static void main(String[] args) throws OptionException {
+    public static void main(String[] args) throws ImperioException {
 
         /*
          * Create a list of options.

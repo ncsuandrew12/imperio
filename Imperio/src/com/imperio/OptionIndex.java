@@ -37,14 +37,14 @@ public class OptionIndex {
      * @param name
      * @param character
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
     public OptionIndex(String name, Character character)
-            throws OptionException {
+            throws ImperioException {
         if (name == null && character == null) {
-            throw new OptionException(new NullPointerException(
+            throw new ImperioException(new NullPointerException(
                     "name and character cannot both be null"));
         }
         this.name = name;
@@ -56,11 +56,11 @@ public class OptionIndex {
      * 
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException if the given character is null
      * 
      * @since 1.0.0
      */
-    public int compareTo(Character character) throws OptionException {
+    public int compareTo(Character character) throws ImperioException {
         return compareTo(new OptionIndex(null, character));
     }
 
@@ -96,11 +96,11 @@ public class OptionIndex {
      * 
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException if the given name is null
      * 
      * @since 1.0.0
      */
-    public int compareTo(String name) throws OptionException {
+    public int compareTo(String name) throws ImperioException {
         return compareTo(new OptionIndex(name, null));
     }
 

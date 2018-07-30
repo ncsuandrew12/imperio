@@ -25,14 +25,14 @@ package com.imperio.examples.echo.p06helpaddenda;
 
 import com.imperio.ImperioApp;
 import com.imperio.ImperioAppSpec;
-import com.imperio.OptionException;
+import com.imperio.ImperioException;
 import com.imperio.OptionHelp;
 import com.imperio.OptionSpec;
 import com.imperio.StringArrContainer;
 
 public class Echo {
 
-    public static void main(String[] args) throws OptionException {
+    public static void main(String[] args) throws ImperioException {
 
         OptionSpec optSpec = OptionHelp.generateSpec();
         optSpec.character = null;

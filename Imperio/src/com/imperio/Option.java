@@ -33,16 +33,16 @@ import java.io.File;
 public class Option {
 
     /**
-     * @param type
+     * @param t throwableype
      * @param value
      * 
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    static Object checkValue(OptionType type, Object value) throws OptionException {
+    static Object checkValue(OptionType type, Object value) throws ImperioException {
         if (value != null) {
             switch (type) {
             case ARG:
@@ -74,11 +74,11 @@ public class Option {
      * 
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public static Option generate(OptionSpec spec) throws OptionException {
+    public static Option generate(OptionSpec spec) throws ImperioException {
         spec = new OptionSpec(spec);
         if (spec.defaultValue == null) {
             switch (spec.type) {
@@ -126,13 +126,13 @@ public class Option {
      * @param clazz1
      * @param clazz2
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
     private static void wrongDefaultValueType(Class<?> clazz1, Class<?> clazz2)
-            throws OptionException {
-        OptionException e = new OptionException("Default value is a "
+            throws ImperioException {
+        ImperioException e = new ImperioException("Default value is a "
                 + clazz1.getSimpleName() + ", not a " + clazz2.getSimpleName());
         throw e;
     }
@@ -141,13 +141,13 @@ public class Option {
      * @param clazz1
      * @param clazz2
      * 
-     * @throws OptionException
+     * @throws ImperioException 
      * 
      * @since 1.0.0
      */
     private static void wrongValueType(Class<?> clazz1, Class<?> clazz2)
-            throws OptionException {
-        OptionException e = new OptionException("Value is a "
+            throws ImperioException {
+        ImperioException e = new ImperioException("Value is a "
                 + clazz1.getSimpleName() + ", not a " + clazz2.getSimpleName());
         throw e;
     }
@@ -197,11 +197,11 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public Boolean getDefaultValueBoolean() throws OptionException {
+    public Boolean getDefaultValueBoolean() throws ImperioException {
         if (defaultValue == null) {
             return null;
         }
@@ -215,11 +215,11 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public File getDefaultValueFile() throws OptionException {
+    public File getDefaultValueFile() throws ImperioException {
         if (defaultValue == null) {
             return null;
         }
@@ -236,11 +236,11 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public Integer getDefaultValueInt() throws OptionException {
+    public Integer getDefaultValueInt() throws ImperioException {
         if (defaultValue == null) {
             return null;
         }
@@ -254,11 +254,11 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public String getDefaultValueString() throws OptionException {
+    public String getDefaultValueString() throws ImperioException {
         if (defaultValue == null) {
             return null;
         }
@@ -293,11 +293,11 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public Boolean getValueBoolean() throws OptionException {
+    public Boolean getValueBoolean() throws ImperioException {
         if (value == null) {
             return null;
         }
@@ -311,11 +311,11 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public File getValueFile() throws OptionException {
+    public File getValueFile() throws ImperioException {
         if (value == null) {
             return null;
         }
@@ -332,11 +332,11 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public Integer getValueInt() throws OptionException {
+    public Integer getValueInt() throws ImperioException {
         if (value == null) {
             return null;
         }
@@ -350,11 +350,11 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public String getValueString() throws OptionException {
+    public String getValueString() throws ImperioException {
         if (value == null) {
             return null;
         }
@@ -368,11 +368,11 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public boolean isFlagSet() throws OptionException {
+    public boolean isFlagSet() throws ImperioException {
         if (value == null) {
             return false;
         }
@@ -385,8 +385,6 @@ public class Option {
     /**
      * @return
      * 
-     * @throws OptionException
-     * 
      * @since 1.0.0
      */
     public boolean isProvided() {
@@ -394,13 +392,11 @@ public class Option {
     }
 
     /**
-     * @return
-     * 
-     * @throws OptionException
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public void setValue(Object value) throws OptionException {
+    public void setValue(Object value) throws ImperioException {
         if (value != null) {
             checkValue(this.type, value);
         }

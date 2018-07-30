@@ -31,7 +31,7 @@ package com.imperio;
 public interface ImpLogger {
 
     /**
-     * @param format
+     * @param format printf format string
      * @param args
      * 
      * @since 1.0.0
@@ -39,15 +39,15 @@ public interface ImpLogger {
     public void log(String format, Object... args);
 
     /**
-     * @param t
+     * @param t throwable
      * 
      * @since 1.0.0
      */
     public void log(Throwable t);
 
     /**
-     * @param t
-     * @param format
+     * @param t throwable
+     * @param format printf format string
      * @param args
      * 
      * @since 1.0.0

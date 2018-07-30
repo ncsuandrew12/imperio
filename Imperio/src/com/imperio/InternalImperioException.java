@@ -28,51 +28,51 @@ package com.imperio;
  *
  * @since 1.0.0
  */
-public class OptionException extends Exception {
+public class InternalImperioException extends ImperioException {
 
-    private static final long serialVersionUID = 984789956991621020L;
+    private static final long serialVersionUID = 7870284670698022140L;
 
     /**
-     * @param format
-     * @param args
+     * @param format printf format string
+     * @param args printf args
      * 
      * @since 1.0.0
      */
-    public OptionException(String format, Object... args) {
-        this((Throwable) null, (String) null, format, args);
+    public InternalImperioException(String format, Object... args) {
+        super(format, args);
     }
 
     /**
-     * @param t
+     * @param t throwable
      * 
      * @since 1.0.0
      */
-    public OptionException(Throwable t) {
+    public InternalImperioException(Throwable t) {
         super(t);
     }
 
     /**
-     * @param t
-     * @param format
-     * @param args
+     * @param t throwable
+     * @param format printf format string
+     * @param args printf args
      * 
      * @since 1.0.0
      */
-    public OptionException(Throwable t, String format, Object... args) {
-        this(t, (String) null, format, args);
+    public InternalImperioException(Throwable t, String format, Object... args) {
+        super(t, format, args);
     }
 
     /**
-     * @param t
-     * @param prefix
-     * @param format
-     * @param args
+     * @param t throwable
+     * @param prefix error message prefix
+     * @param format printf format string
+     * @param args printf args
      * 
      * @since 1.0.0
      */
-    public OptionException(Throwable t, String prefix, String format,
+    public InternalImperioException(Throwable t, String prefix, String format,
             Object... args) {
-        super((prefix == null ? "" : prefix) + String.format(format, args), t);
+        super(t, prefix, format, args);
     }
 
 }

@@ -24,6 +24,10 @@
 package com.imperio;
 
 /**
+ * This {@link ErrorHandler} behaves the same as {@link ErrorHandlerPrint},
+ * except that after logging error messages, it throws
+ * {@link InternalImperioException}s.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -34,8 +38,8 @@ public class ErrorHandlerException extends ErrorHandlerPrint {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, ImperioApp impApp, String format, Object... args)
-            throws OptionException {
+    public void err(ErrorType err, ImperioApp impApp, String format,
+            Object... args) throws InternalImperioException {
         err(err, impApp, null, format, args);
     }
 
@@ -43,30 +47,30 @@ public class ErrorHandlerException extends ErrorHandlerPrint {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, ImperioApp impApp, Throwable t)
-            throws OptionException {
-        err(err, impApp, t, null);
+    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex)
+            throws InternalImperioException {
+        err(err, impApp, ex, null);
     }
 
     /**
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, ImperioApp impApp, Throwable t, String format,
-            Object... args) throws OptionException {
+    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex,
+            String format, Object... args) throws InternalImperioException {
         if (firstError == null) {
             firstError = err;
         }
-        if (t == null) {
-            throw new OptionException(null, err.msg + " ", format, args);
+        if (ex == null) {
+            throw new InternalImperioException(null, err.msg + " ", format, args);
         }
-        if ((t instanceof OptionException) && (format == null)) {
-            throw (OptionException) t;
+        if ((ex instanceof InternalImperioException) && (format == null)) {
+            throw (InternalImperioException) ex;
         }
         if (format == null) {
-            throw new OptionException(t, err.msg);
+            throw new InternalImperioException(ex, err.msg);
         }
-        throw new OptionException(t, err.msg + " ", format, args);
+        throw new InternalImperioException(ex, err.msg + " ", format, args);
     }
 
     /**
