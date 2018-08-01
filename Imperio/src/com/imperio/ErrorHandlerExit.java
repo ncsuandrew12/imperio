@@ -24,7 +24,9 @@
 package com.imperio;
 
 /**
- * 
+ * This {@link ErrorHandler} behaves the same as {@link ErrorHandlerPrint},
+ * except that after logging error messages, it terminates the program using the
+ * provided {@link ErrorType#code}.
  * 
  * @author afelsher
  *

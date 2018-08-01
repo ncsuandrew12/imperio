@@ -27,6 +27,9 @@ import java.io.PrintStream;
 import java.util.ListIterator;
 
 /**
+ * This {@link HelpGen} builds the application help text in the default manner,
+ * roughly imitating a man page.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -56,8 +59,13 @@ public class HelpGenDefault extends HelpGen {
     }
 
     /**
+     * Print the full help text for the given Imperio app to the given print
+     * stream.
+     * 
      * @param ps
-     * @param impApp Imperio application instance
+     *            destination print stream for the help text
+     * @param impApp
+     *            Imperio application instance
      * 
      * @throws ImperioException
      * 
@@ -99,7 +107,7 @@ public class HelpGenDefault extends HelpGen {
             if (opt.name != null) {
                 ps.printf("--%s", opt.name);
             }
-            if (opt.type == OptionType.ARG) {
+            if (opt.type.archetype == OptionArchetype.VALUE) {
                 ps.printf(" <%s>", opt.valPlaceholder);
             }
             if (opt.deprecated) {
@@ -188,16 +196,6 @@ public class HelpGenDefault extends HelpGen {
         }
     }
 
-    /**
-     * @param ps
-     * @param indent
-     * @param indentLen
-     * @param str
-     * 
-     * @throws InternalImperioException
-     * 
-     * @since 1.0.0
-     */
     private void wrap(PrintStream ps, ImperioApp impApp, String indent,
             int indentLen, String str) throws InternalImperioException {
         int wrapWidth = 80 -indentLen;

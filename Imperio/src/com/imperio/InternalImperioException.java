@@ -33,8 +33,10 @@ public class InternalImperioException extends ImperioException {
     private static final long serialVersionUID = 7870284670698022140L;
 
     /**
-     * @param format printf format string
-     * @param args printf args
+     * @param format
+     *            printf format string
+     * @param args
+     *            printf args
      * 
      * @since 1.0.0
      */
@@ -43,7 +45,8 @@ public class InternalImperioException extends ImperioException {
     }
 
     /**
-     * @param t throwable
+     * @param t
+     *            throwable
      * 
      * @since 1.0.0
      */
@@ -52,21 +55,29 @@ public class InternalImperioException extends ImperioException {
     }
 
     /**
-     * @param t throwable
-     * @param format printf format string
-     * @param args printf args
+     * @param t
+     *            throwable
+     * @param format
+     *            printf format string
+     * @param args
+     *            printf args
      * 
      * @since 1.0.0
      */
-    public InternalImperioException(Throwable t, String format, Object... args) {
+    public InternalImperioException(Throwable t, String format,
+            Object... args) {
         super(t, format, args);
     }
 
     /**
-     * @param t throwable
-     * @param prefix error message prefix
-     * @param format printf format string
-     * @param args printf args
+     * @param t
+     *            throwable
+     * @param prefix
+     *            error message prefix
+     * @param format
+     *            printf format string
+     * @param args
+     *            printf args
      * 
      * @since 1.0.0
      */

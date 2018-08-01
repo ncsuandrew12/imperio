@@ -24,6 +24,8 @@
 package com.imperio;
 
 /**
+ * This {@link ImpLogger} prints all log messages to the console.
+ * 
  * @author afelsher
  */
 public class ImpLoggerPrint implements ImpLogger {

@@ -24,37 +24,17 @@
 package com.imperio;
 
 /**
- * <p>Instances of this class represent an example invocation of an application.</p>
- * 
- * <p>This is used to generate example commands for the help text.</p>
- * 
  * @author afelsher
- *
+ * 
  * @since 1.0.0
  */
-public class ExampleCommand {
-
+public enum OptionArchetype {
     /**
      * @since 1.0.0
      */
-    public final String[] args;
-
+    NO_VALUE,
     /**
      * @since 1.0.0
      */
-    public final String description;
-
-    /**
-     * @param description
-     *            description of the example command
-     * @param args
-     *            array of the example command's arguments
-     * 
-     * @since 1.0.0
-     */
-    public ExampleCommand(String description, String[] args) {
-        this.description = description;
-        this.args = args;
-    }
-
+    VALUE;
 }

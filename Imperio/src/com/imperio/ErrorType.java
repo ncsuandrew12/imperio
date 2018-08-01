@@ -24,6 +24,9 @@
 package com.imperio;
 
 /**
+ * Instances of this class represent a category of errors that may occur. In addition
+ * to the predefined types statically defined here
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -32,17 +35,20 @@ public class ErrorType {
 
     public static final ErrorType GENERIC = new ErrorType(1, "Generic error.");
     public static final ErrorType IMPERIO =
-            new ErrorType(255, "Error in Imperio library.");
+            new ErrorType(0x100, "Error in Imperio library.");
+    public static final ErrorType INVALID_ARG =
+            new ErrorType(0x101, "Invalid option argument.");
     public static final ErrorType INVALID_OPTION =
-            new ErrorType(2, "Invalid option.");
-    public static final ErrorType MISSING_ARG = new ErrorType(5,
-            "Missing argument for " + OptionType.ARG + " option.");
+            new ErrorType(0x102, "Invalid option.");
+    public static final ErrorType MISSING_ARG = new ErrorType(0x103,
+            "Missing argument for " + OptionArchetype.VALUE + " option.");
     public static final ErrorType MISSING_REQ_OPTION =
-            new ErrorType(6, "Missing required option.");
+            new ErrorType(0x104, "Missing required option.");
     public static final ErrorType OPTION_PARSING =
-            new ErrorType(3, "Unable to parse option.");
+            new ErrorType(0x105, "Unable to parse option.");
     public static final ErrorType UNKNOWN_OPTION =
-            new ErrorType(4, "Unknown option.");
+            new ErrorType(0x106, "Unknown option.");
+
     public final int code;
     public final String description;
     public final String msg;

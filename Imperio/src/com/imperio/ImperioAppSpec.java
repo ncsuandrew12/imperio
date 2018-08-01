@@ -24,6 +24,9 @@
 package com.imperio;
 
 /**
+ * Instances of this class contain all the necessary information to generate an
+ * Imperio application instance.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -54,17 +57,15 @@ public class ImperioAppSpec {
     public OptionHelp helpOpt = DEFAULT_HELP_OPT;
     public String invocation;
     public ImpLogger logger = DEFAULT_LOGGER;
-    public boolean noMatchError = DEFAULT_NO_MATCH_ERROR;
+    public boolean unknownOptionError = DEFAULT_NO_MATCH_ERROR;
     public String seeAlso = DEFAULT_SEE_ALSO;
     public String usageAddenda = DEFAULT_USAGE_ADDENDA;
     public UsageGen usageGen = DEFAULT_USAGE_GEN;
 
     /**
-     * @throws InternalImperioException
-     * 
      * @since 1.0.0
      */
-    public ImperioAppSpec() throws InternalImperioException {
+    public ImperioAppSpec() {
         StackTraceElement[] ste = new Throwable().getStackTrace();
         String cn = ste[ste.length - 1].getClassName();
         int index = cn.lastIndexOf(".");
@@ -83,7 +84,7 @@ public class ImperioAppSpec {
      * 
      * @since 1.0.0
      */
-    public ImperioAppSpec(ImperioAppSpec spec) throws InternalImperioException {
+    public ImperioAppSpec(ImperioAppSpec spec) {
         this.author = spec.author;
         this.copyright = spec.copyright;
         this.description = spec.description;
@@ -93,8 +94,8 @@ public class ImperioAppSpec {
         this.helpOpt = spec.helpOpt;
         this.invocation = spec.invocation;
         this.logger = spec.logger;
-        this.noMatchError = spec.noMatchError;
         this.seeAlso = spec.seeAlso;
+        this.unknownOptionError = spec.unknownOptionError;
         this.usageAddenda = spec.usageAddenda;
         this.usageGen = spec.usageGen;
     }

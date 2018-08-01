@@ -24,6 +24,9 @@
 package com.imperio;
 
 /**
+ * This {@link ErrorHandler} prints any errors to {@code System.err} and any
+ * warnings to {@code System.out}.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -59,8 +62,8 @@ public class ErrorHandlerPrint implements ErrorHandler {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex)
-            throws InternalImperioException {
+    public void err(ErrorType err, ImperioApp impApp,
+            InternalImperioException ex) throws InternalImperioException {
         err(err, impApp, ex, null);
     }
 
@@ -68,8 +71,9 @@ public class ErrorHandlerPrint implements ErrorHandler {
      * @since 1.0.0
      */
     @Override
-    public void err(ErrorType err, ImperioApp impApp, InternalImperioException ex,
-            String format, Object... args) throws InternalImperioException {
+    public void err(ErrorType err, ImperioApp impApp,
+            InternalImperioException ex, String format, Object... args)
+            throws InternalImperioException {
         err(err, impApp, format, args);
         if (ex != null) {
             ex.printStackTrace(System.err);
