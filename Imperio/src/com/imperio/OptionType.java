@@ -32,21 +32,35 @@ public enum OptionType {
     /**
      * @since 1.0.0
      */
-    ARG,
+    ARG(OptionArchetype.VALUE),
     /**
      * @since 1.0.0
      */
-    CUSTOM,
+    CUSTOM_ARG(OptionArchetype.VALUE),
     /**
      * @since 1.0.0
      */
-    DECREMENTER,
+    CUSTOM_FLAG(OptionArchetype.NO_VALUE),
     /**
      * @since 1.0.0
      */
-    FLAG,
+    DECREMENTER(OptionArchetype.NO_VALUE),
     /**
      * @since 1.0.0
      */
-    INCREMENTER;
+    FILE(OptionArchetype.VALUE),
+    /**
+     * @since 1.0.0
+     */
+    FLAG(OptionArchetype.NO_VALUE),
+    /**
+     * @since 1.0.0
+     */
+    INCREMENTER(OptionArchetype.NO_VALUE);
+
+    public final OptionArchetype archetype;
+
+    OptionType(OptionArchetype archetype) {
+        this.archetype = archetype;
+    }
 }

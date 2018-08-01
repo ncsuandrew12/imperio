@@ -26,6 +26,9 @@ package com.imperio;
 import java.io.File;
 
 /**
+ * Instances of this class represent a command-line option and contain all the
+ * necessary information for parsing it.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -33,8 +36,13 @@ import java.io.File;
 public class Option {
 
     /**
-     * @param t throwableype
+     * Checks that the given value is an acceptable data type for the given
+     * option type.
+     * 
+     * @param optType
+     *            option type
      * @param value
+     *            value to check
      * 
      * @return
      * 
@@ -42,12 +50,17 @@ public class Option {
      * 
      * @since 1.0.0
      */
-    static Object checkValue(OptionType type, Object value) throws ImperioException {
+    static Object checkValue(OptionType optType, Object value) throws ImperioException {
         if (value != null) {
-            switch (type) {
+            switch (optType) {
             case ARG:
                 if (!(value instanceof String)) {
                     wrongValueType(value.getClass(), String.class);
+                }
+                break;
+            case FILE:
+                if (!(value instanceof File)) {
+                    wrongValueType(value.getClass(), File.class);
                 }
                 break;
             case FLAG:
@@ -61,7 +74,8 @@ public class Option {
                     wrongValueType(value.getClass(), Integer.class);
                 }
                 break;
-            case CUSTOM:
+            case CUSTOM_ARG:
+            case CUSTOM_FLAG:
             default:
                 break;
             }
@@ -102,7 +116,8 @@ public class Option {
                 }
                 break;
             case ARG:
-            case CUSTOM:
+            case CUSTOM_ARG:
+            case CUSTOM_FLAG:
             default:
                 break;
             }
@@ -110,7 +125,8 @@ public class Option {
             spec.defaultValue = checkValue(spec.type, spec.defaultValue);
         }
 
-        if ((spec.type == OptionType.ARG) && (spec.valPlaceholder == null)) {
+        if ((spec.type.archetype == OptionArchetype.VALUE)
+                && (spec.valPlaceholder == null)) {
             spec.valPlaceholder = OptionSpec.DEFAULT_ARG_VAL_DESCRPTION;
         }
 
@@ -123,32 +139,34 @@ public class Option {
     }
 
     /**
-     * @param clazz1
-     * @param clazz2
+     * @param actualClass
+     * @param expectedClass
      * 
      * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    private static void wrongDefaultValueType(Class<?> clazz1, Class<?> clazz2)
-            throws ImperioException {
-        ImperioException e = new ImperioException("Default value is a "
-                + clazz1.getSimpleName() + ", not a " + clazz2.getSimpleName());
+    private static void wrongDefaultValueType(Class<?> actualClass,
+            Class<?> expectedClass) throws ImperioException {
+        ImperioException e = new ImperioException(
+                "Default value is a " + actualClass.getSimpleName() + ", not a "
+                        + expectedClass.getSimpleName());
         throw e;
     }
 
     /**
-     * @param clazz1
-     * @param clazz2
+     * @param actualClass
+     * @param expectedClass
      * 
-     * @throws ImperioException 
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    private static void wrongValueType(Class<?> clazz1, Class<?> clazz2)
-            throws ImperioException {
-        ImperioException e = new ImperioException("Value is a "
-                + clazz1.getSimpleName() + ", not a " + clazz2.getSimpleName());
+    private static void wrongValueType(Class<?> actualClass,
+            Class<?> expectedClass) throws ImperioException {
+        ImperioException e =
+                new ImperioException("Value is a " + actualClass.getSimpleName()
+                        + ", not a " + expectedClass.getSimpleName());
         throw e;
     }
 

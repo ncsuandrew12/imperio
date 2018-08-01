@@ -62,8 +62,8 @@ public class UsageGenChars extends UsageGen {
                 continue;
             }
             if (arg.required) {
-                switch (arg.type) {
-                case ARG:
+                switch (arg.type.archetype) {
+                case VALUE:
                     if (arg.character != null) {
                         reqArgs.write(" -" + arg.character + " <"
                                 + arg.valPlaceholder + ">");
@@ -72,9 +72,7 @@ public class UsageGenChars extends UsageGen {
                                 + arg.valPlaceholder + ">");
                     }
                     break;
-                case CUSTOM:
-                case FLAG:
-                case INCREMENTER:
+                case NO_VALUE:
                     // Will probably never happen
                     if (arg.character != null) {
                         if (!foundReqFlags) {
@@ -88,11 +86,11 @@ public class UsageGenChars extends UsageGen {
                     break;
                 default:
                     throw new ImperioException(
-                            "Unknown option type " + arg.type);
+                            "Unknown option archetype " + arg.type);
                 }
             } else {
-                switch (arg.type) {
-                case ARG:
+                switch (arg.type.archetype) {
+                case VALUE:
                     if (arg.character != null) {
                         optArgs.write(" [-" + arg.character + " <"
                                 + arg.valPlaceholder + ">]");
@@ -101,9 +99,7 @@ public class UsageGenChars extends UsageGen {
                                 + arg.valPlaceholder + ">]");
                     }
                     break;
-                case CUSTOM:
-                case FLAG:
-                case INCREMENTER:
+                case NO_VALUE:
                     if (arg.character != null) {
                         if (!foundOptFlags) {
                             foundOptFlags = true;
@@ -116,7 +112,7 @@ public class UsageGenChars extends UsageGen {
                     break;
                 default:
                     throw new ImperioException(
-                            "Unknown option type " + arg.type);
+                            "Unknown option archetype " + arg.type);
                 }
             }
         }

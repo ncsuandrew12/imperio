@@ -24,6 +24,20 @@
 package com.imperio;
 
 /**
+ * <p>
+ * This class handles all of Imperio's internal logging.
+ * </p>
+ * 
+ * <p>
+ * Applications may use the included {@link ImpLoggerPrint} to log messages to
+ * the console or {@link ImpLoggerNull} to ignore all log messages.
+ * </p>
+ * 
+ * <p>
+ * Applications may also create and use their own implementations of this
+ * interface.
+ * </p>
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -31,24 +45,30 @@ package com.imperio;
 public interface ImpLogger {
 
     /**
-     * @param format printf format string
+     * @param format
+     *            printf format string
      * @param args
+     *            printf args
      * 
      * @since 1.0.0
      */
     public void log(String format, Object... args);
 
     /**
-     * @param t throwable
+     * @param t
+     *            throwable
      * 
      * @since 1.0.0
      */
     public void log(Throwable t);
 
     /**
-     * @param t throwable
-     * @param format printf format string
+     * @param t
+     *            throwable
+     * @param format
+     *            printf format string
      * @param args
+     *            printf args
      * 
      * @since 1.0.0
      */

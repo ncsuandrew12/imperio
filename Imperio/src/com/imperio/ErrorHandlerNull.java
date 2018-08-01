@@ -24,6 +24,9 @@
 package com.imperio;
 
 /**
+ * This {@link ErrorHandler} silently swallows all errors and warnings. However,
+ * {@link #firstError()} will still return the first error type that occurs.
+ * 
  * @author afelsher
  *
  * @since 1.0.0

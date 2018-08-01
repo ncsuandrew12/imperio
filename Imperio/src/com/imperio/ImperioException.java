@@ -33,8 +33,10 @@ public class ImperioException extends Exception {
     private static final long serialVersionUID = 984789956991621020L;
 
     /**
-     * @param format printf format string
+     * @param format
+     *            printf format string
      * @param args
+     *            printf args
      * 
      * @since 1.0.0
      */
@@ -43,7 +45,8 @@ public class ImperioException extends Exception {
     }
 
     /**
-     * @param t throwable
+     * @param t
+     *            throwable
      * 
      * @since 1.0.0
      */
@@ -52,9 +55,12 @@ public class ImperioException extends Exception {
     }
 
     /**
-     * @param t throwable
-     * @param format printf format string
+     * @param t
+     *            throwable
+     * @param format
+     *            printf format string
      * @param args
+     *            printf args
      * 
      * @since 1.0.0
      */
@@ -63,9 +69,11 @@ public class ImperioException extends Exception {
     }
 
     /**
-     * @param t throwable
+     * @param t
+     *            throwable
      * @param prefix
-     * @param format printf format string
+     * @param format
+     *            printf format string
      * @param args
      * 
      * @since 1.0.0

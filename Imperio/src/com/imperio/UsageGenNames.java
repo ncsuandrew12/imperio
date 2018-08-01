@@ -62,8 +62,8 @@ public class UsageGenNames extends UsageGen {
                 continue;
             }
             if (arg.required) {
-                switch (arg.type) {
-                case ARG:
+                switch (arg.type.archetype) {
+                case VALUE:
                     if (arg.name != null) {
                         reqArgs.write(" --" + arg.name + " <"
                                 + arg.valPlaceholder + ">");
@@ -72,9 +72,7 @@ public class UsageGenNames extends UsageGen {
                                 + arg.valPlaceholder + ">");
                     }
                     break;
-                case CUSTOM:
-                case FLAG:
-                case INCREMENTER:
+                case NO_VALUE:
                     // Will probably never happen
                     if (arg.name != null) {
                         reqFlags.write(" --" + arg.name);
@@ -91,8 +89,8 @@ public class UsageGenNames extends UsageGen {
                             "Unknown option type " + arg.type);
                 }
             } else {
-                switch (arg.type) {
-                case ARG:
+                switch (arg.type.archetype) {
+                case VALUE:
                     if (arg.name != null) {
                         optArgs.write(" [--" + arg.name + " <"
                                 + arg.valPlaceholder + ">]");
@@ -101,9 +99,7 @@ public class UsageGenNames extends UsageGen {
                                 + arg.valPlaceholder + ">]");
                     }
                     break;
-                case CUSTOM:
-                case FLAG:
-                case INCREMENTER:
+                case NO_VALUE:
                     if (arg.name != null) {
                         optArgs.write(" [--" + arg.name + "]");
                     } else {

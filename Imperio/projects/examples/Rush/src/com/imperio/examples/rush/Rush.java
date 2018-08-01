@@ -23,6 +23,10 @@
  */
 package com.imperio.examples.rush;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import com.imperio.ImpLoggerPrint;
 import com.imperio.ImperioApp;
 import com.imperio.ImperioAppSpec;
@@ -33,7 +37,8 @@ import com.imperio.UsageGenChars;
 
 public class Rush {
 
-    public static void main(String[] args) throws ImperioException {
+    public static void main(String[] args)
+            throws ImperioException, IOException {
 
         OptionSpec optSpec = OptionHelp.generateSpec();
         optSpec.character = 'h';
@@ -88,7 +93,10 @@ public class Rush {
         impApp.addExample("Showcase error-correcting argument suggestions:", new String[] {
                 Parameter.LAST_LINE.getOpt().getInvocation(),
                 "blah",
-                "-quiet" });
+                        "-quiet" });
+        impApp.addExample(new String[] {
+                Parameter.FILE_TXT.getOpt().getInvocation(),
+                "file.txt" });
 
         if (!impApp.processArgs(args)) {
             return;
@@ -134,6 +142,19 @@ public class Rush {
         System.out.println();
         System.out.printf("Verbosity: %d\n",
                 Parameter.VERBOSITY.getOpt().getValueInt());
+
+        if (Parameter.FILE_TXT.getOpt().isProvided()) {
+            File file = Parameter.FILE_TXT.getOpt().getValueFile();
+            System.out.println();
+            System.out.printf("Output file: %s\n", file.getAbsolutePath());
+            FileOutputStream fos = new FileOutputStream(file);
+            try {
+                fos.write("file contents\n".getBytes());
+            } finally {
+                fos.close();
+            }
+        }
+
         System.out.println();
     }
 
