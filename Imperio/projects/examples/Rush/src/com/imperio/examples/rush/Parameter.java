@@ -31,6 +31,7 @@ import com.imperio.OptionType;
 public enum Parameter {
 
     ARG_I(),
+    FILE_TXT(),
     FLAG_E(),
     FLAG_U(),
     LAST_LINE(),
@@ -47,6 +48,12 @@ public enum Parameter {
             case ARG_I:
                 optSpec.character = 'i';
                 optSpec.type = OptionType.ARG;
+                break;
+            case FILE_TXT:
+                optSpec.character = 'f';
+                optSpec.name = "file";
+                optSpec.type = OptionType.FILE;
+                optSpec.valPlaceholder = "output-file";
                 break;
             case FLAG_E:
                 optSpec.character = 'e';

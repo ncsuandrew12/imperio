@@ -27,6 +27,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 /**
+ * This class creates and/or prints the help text. Developers may use the
+ * included {@link HelpGenDefault}, or they may implement their own.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -42,7 +45,7 @@ public abstract class HelpGen {
     /**
      * @param impApp Imperio application instance
      * 
-     * @return
+     * @return the complete help text
      * 
      * @throws ImperioException
      * 

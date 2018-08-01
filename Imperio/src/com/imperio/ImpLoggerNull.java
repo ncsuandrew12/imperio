@@ -24,12 +24,13 @@
 package com.imperio;
 
 /**
+ * This {@link ImpLogger} ignores all log messages.
+ * 
  * @author afelsher
  */
 public class ImpLoggerNull implements ImpLogger {
 
     /**
-     * 
      * @since 1.0.0
      */
     @Override
