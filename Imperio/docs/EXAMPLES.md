@@ -398,6 +398,8 @@ The `Echo` command doesn't make full use of the available Imperio features, so t
 
 Aside from running the example code directly from Eclipse, the easiest way to run it is to export Rush as a runnable jar (right click on the Rush project -> Export -> Java / Runnable Jar File).
 
+`java -jar Rush.jar -h`
+
 ## Custom Error Handler
 
 This Rush app demonstrates using a custom `ErrorHandler` to deal with errors encountered when processing the options. Simply set the `ImperioAppSpec.errorHandler` field.

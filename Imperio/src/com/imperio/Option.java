@@ -1,54 +1,133 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2018 by Andrew Felsher
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.imperio;
 
+import java.io.File;
+
+/**
+ * Instances of this class represent a command-line option and contain all the
+ * necessary information for parsing it.
+ * 
+ * @author afelsher
+ *
+ * @since 1.0.0
+ */
 public class Option {
 
-    public static Option generate(OptionSpec spec) {
+    /**
+     * Checks that the given value is an acceptable data type for the given
+     * option type.
+     * 
+     * @param optType
+     *            option type
+     * @param value
+     *            value to check
+     * 
+     * @return the given value if it is valid, else null
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    static Object checkValue(OptionType optType, Object value) throws ImperioException {
+        if (value != null) {
+            switch (optType) {
+            case ARG:
+                if (!(value instanceof String)) {
+                    wrongValueType(value.getClass(), String.class);
+                }
+                break;
+            case FILE:
+                if (!(value instanceof File)) {
+                    wrongValueType(value.getClass(), File.class);
+                }
+                break;
+            case FLAG:
+                if (!(value instanceof Boolean)) {
+                    wrongValueType(value.getClass(), Boolean.class);
+                }
+                break;
+            case DECREMENTER:
+            case INCREMENTER:
+                if (!(value instanceof Integer) && !(value instanceof Long)) {
+                    wrongValueType(value.getClass(), Integer.class);
+                }
+                break;
+            case CUSTOM_ARG:
+            case CUSTOM_FLAG:
+            default:
+                break;
+            }
+        }
+        return value;
+    }
+
+    /**
+     * @param spec
+     *            the option spec
+     * 
+     * @return an option based on the given spec
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public static Option generate(OptionSpec spec) throws ImperioException {
         spec = new OptionSpec(spec);
         if (spec.defaultValue == null) {
             switch (spec.type) {
             case FLAG:
                 if (spec.linkOption != null) {
-                    spec.defaultValue = !(boolean) spec.linkOption.defaultValue;
+                    spec.defaultValue = checkValue(spec.type,
+                            !spec.linkOption.getDefaultValueBoolean());
                 } else {
-                    spec.defaultValue = OptionSpec.DEFAULT_DEFAULT_VALUE_FLAG;
+                    spec.defaultValue = checkValue(spec.type,
+                            OptionSpec.DEFAULT_DEFAULT_VALUE_FLAG);
                 }
                 break;
             case DECREMENTER:
             case INCREMENTER:
                 if (spec.linkOption != null) {
-                    spec.defaultValue = spec.linkOption.defaultValue;
+                    spec.defaultValue = checkValue(spec.type,
+                            spec.linkOption.getDefaultValueInt());
                 } else {
-                    spec.defaultValue = OptionSpec.DEFAULT_DEFAULT_VALUE_INCR;
+                    spec.defaultValue = checkValue(spec.type,
+                            OptionSpec.DEFAULT_DEFAULT_VALUE_FLAG);
                 }
                 break;
             case ARG:
-            case CUSTOM:
+            case CUSTOM_ARG:
+            case CUSTOM_FLAG:
             default:
                 break;
             }
         } else {
-            switch (spec.type) {
-            case FLAG:
-                if (!Boolean.class
-                        .isAssignableFrom(spec.defaultValue.getClass())) {
-                    // TODO Warning
-                }
-                break;
-            case DECREMENTER:
-            case INCREMENTER:
-                if (!Integer.class
-                        .isAssignableFrom(spec.defaultValue.getClass())) {
-                    // TODO Warning
-                }
-                break;
-            case ARG:
-            case CUSTOM:
-            default:
-                break;
-            }
+            spec.defaultValue = checkValue(spec.type, spec.defaultValue);
         }
 
-        if ((spec.type == OptionType.ARG) && (spec.valPlaceholder == null)) {
+        if ((spec.type.archetype == OptionArchetype.VALUE)
+                && (spec.valPlaceholder == null)) {
             spec.valPlaceholder = OptionSpec.DEFAULT_ARG_VAL_DESCRPTION;
         }
 
@@ -60,10 +139,42 @@ public class Option {
         return opt;
     }
 
+    /**
+     * @param actualClass
+     * @param expectedClass
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    private static void wrongDefaultValueType(Class<?> actualClass,
+            Class<?> expectedClass) throws ImperioException {
+        ImperioException e = new ImperioException(
+                "Default value is a " + actualClass.getSimpleName() + ", not a "
+                        + expectedClass.getSimpleName());
+        throw e;
+    }
+
+    /**
+     * @param actualClass
+     * @param expectedClass
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    private static void wrongValueType(Class<?> actualClass,
+            Class<?> expectedClass) throws ImperioException {
+        ImperioException e =
+                new ImperioException("Value is a " + actualClass.getSimpleName()
+                        + ", not a " + expectedClass.getSimpleName());
+        throw e;
+    }
+
     public final boolean auto;
     protected final OptionCallback callback;
     public final Character character;
-    public final Object defaultValue;
+    private final Object defaultValue;
     public final boolean deprecated;
     public final String description;
     Option linkOption = null;
@@ -74,6 +185,12 @@ public class Option {
     public final String valPlaceholder;
     private Object value = null;
 
+    /**
+     * @param spec
+     *            option spec
+     * 
+     * @since 1.0.0
+     */
     Option(OptionSpec spec) {
         this.auto = spec.auto;
         this.callback = spec.callback;
@@ -88,33 +205,240 @@ public class Option {
         this.valPlaceholder = spec.valPlaceholder;
     }
 
-    public Object getValue() {
-        return value;
+    /**
+     * @return the default value
+     * 
+     * @since 1.0.0
+     */
+    public Object getDefaultValue() {
+        return defaultValue;
     }
 
-    void setValue(Object value) {
-        this.value = value;
-    }
-
-    public boolean isSet() {
-        if (value == null) {
-            return false;
+    /**
+     * @return the default value if it is a boolean, else null
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public Boolean getDefaultValueBoolean() throws ImperioException {
+        if (defaultValue == null) {
+            return null;
         }
-        if (!Boolean.class.isAssignableFrom(value.getClass())) {
-            return false;
+        if (defaultValue instanceof Boolean) {
+            return (boolean) defaultValue;
         }
-        return (boolean) value;
+        wrongDefaultValueType(value.getClass(), Boolean.class);
+        return null;
     }
 
-    public boolean isProvided() {
-        return provided;
+    /**
+     * @return the default value if it is a File, else null
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public File getDefaultValueFile() throws ImperioException {
+        if (defaultValue == null) {
+            return null;
+        }
+        if (defaultValue instanceof File) {
+            return (File) defaultValue;
+        }
+        if (defaultValue instanceof String) {
+            return new File((String) defaultValue);
+        }
+        wrongDefaultValueType(value.getClass(), File.class);
+        return null;
     }
 
+    /**
+     * @return the default value if it is an int, else null
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public Integer getDefaultValueInt() throws ImperioException {
+        if (defaultValue == null) {
+            return null;
+        }
+        if (defaultValue instanceof Integer) {
+            return (int) defaultValue;
+        }
+        wrongDefaultValueType(value.getClass(), Integer.class);
+        return null;
+    }
+
+    /**
+     * @return the default value if it is a string, else null
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public String getDefaultValueString() throws ImperioException {
+        if (defaultValue == null) {
+            return null;
+        }
+        if (defaultValue instanceof String) {
+            return (String) defaultValue;
+        }
+        wrongDefaultValueType(value.getClass(), String.class);
+        return null;
+    }
+
+    /**
+     * <p>
+     * If this option has a long-form name, the invocation is "--abc" where
+     * "abc" is the long-form name of the option.
+     * </p>
+     * 
+     * <p>
+     * If this option only has a character, the invocation is "-a", where "a" is
+     * the character.
+     * </p>
+     * 
+     * @return the invocation form of this option as it would be specified on
+     *         the command line
+     * 
+     * @since 1.0.0
+     */
     public String getInvocation() {
         if (name != null) {
             return "--" + name;
         }
         return "-" + character;
+    }
+
+    /**
+     * @return the option's value
+     * 
+     * @since 1.0.0
+     */
+    public Object getValue() {
+        return value;
+    }
+
+    /**
+     * @return the option's value if it is a boolean, else null
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public Boolean getValueBoolean() throws ImperioException {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Boolean) {
+            return (boolean) value;
+        }
+        wrongValueType(value.getClass(), Boolean.class);
+        return null;
+    }
+
+    /**
+     * @return the option's value if it is a file, else null
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public File getValueFile() throws ImperioException {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof File) {
+            return (File) value;
+        }
+        if (value instanceof String) {
+            return new File((String) value);
+        }
+        wrongValueType(value.getClass(), File.class);
+        return null;
+    }
+
+    /**
+     * @return the option's value if it is an int, else null
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public Integer getValueInt() throws ImperioException {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Integer) {
+            return (int) value;
+        }
+        wrongValueType(value.getClass(), Integer.class);
+        return null;
+    }
+
+    /**
+     * @return the option's value if it is a string, else null
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public String getValueString() throws ImperioException {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof String) {
+            return (String) value;
+        }
+        wrongValueType(value.getClass(), String.class);
+        return null;
+    }
+
+    /**
+     * @return {@code true} if-and-only-if the option is a flag which is set to
+     *         {@code true}, else {@code false}
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public boolean isFlagSet() throws ImperioException {
+        if (value == null) {
+            return false;
+        }
+        if (type != OptionType.FLAG) {
+            return false;
+        }
+        return getValueBoolean();
+    }
+
+    /**
+     * @return {@code true} if the option was specified on the command line,
+     *         else {@code false}
+     * 
+     * @since 1.0.0
+     */
+    public boolean isProvided() {
+        return provided;
+    }
+
+    /**
+     * Set the value of this option.
+     * 
+     * @param value
+     *            the new value
+     * 
+     * @throws ImperioException
+     * 
+     * @since 1.0.0
+     */
+    public void setValue(Object value) throws ImperioException {
+        if (value != null) {
+            checkValue(this.type, value);
+        }
+        this.value = value;
     }
 
 }

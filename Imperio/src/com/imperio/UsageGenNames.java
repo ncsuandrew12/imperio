@@ -1,14 +1,50 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2018 by Andrew Felsher
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.imperio;
 
 import java.io.PrintStream;
 import java.io.StringWriter;
 import java.util.ListIterator;
 
+/**
+ * This class only includes option POSIX characters in the usage when the option
+ * does not have a name.
+ * 
+ * @author afelsher
+ * 
+ * @see UsageGenChars
+ *
+ * @since 1.0.0
+ */
 public class UsageGenNames extends UsageGen {
 
+    /**
+     * @since 1.0.0
+     */
     @Override
     public void printUsage(PrintStream ps, ImperioApp impApp)
-            throws OptionException {
+            throws ImperioException {
         boolean foundReqFlags = false;
         boolean foundOptFlags = false;
         StringWriter optArgs = null;
@@ -31,8 +67,8 @@ public class UsageGenNames extends UsageGen {
                 continue;
             }
             if (arg.required) {
-                switch (arg.type) {
-                case ARG:
+                switch (arg.type.archetype) {
+                case VALUE:
                     if (arg.name != null) {
                         reqArgs.write(" --" + arg.name + " <"
                                 + arg.valPlaceholder + ">");
@@ -41,9 +77,7 @@ public class UsageGenNames extends UsageGen {
                                 + arg.valPlaceholder + ">");
                     }
                     break;
-                case CUSTOM:
-                case FLAG:
-                case INCREMENTER:
+                case NO_VALUE:
                     // Will probably never happen
                     if (arg.name != null) {
                         reqFlags.write(" --" + arg.name);
@@ -56,12 +90,12 @@ public class UsageGenNames extends UsageGen {
                     }
                     break;
                 default:
-                    throw new OptionException(
+                    throw new ImperioException(
                             "Unknown option type " + arg.type);
                 }
             } else {
-                switch (arg.type) {
-                case ARG:
+                switch (arg.type.archetype) {
+                case VALUE:
                     if (arg.name != null) {
                         optArgs.write(" [--" + arg.name + " <"
                                 + arg.valPlaceholder + ">]");
@@ -70,9 +104,7 @@ public class UsageGenNames extends UsageGen {
                                 + arg.valPlaceholder + ">]");
                     }
                     break;
-                case CUSTOM:
-                case FLAG:
-                case INCREMENTER:
+                case NO_VALUE:
                     if (arg.name != null) {
                         optArgs.write(" [--" + arg.name + "]");
                     } else {
@@ -84,7 +116,7 @@ public class UsageGenNames extends UsageGen {
                     }
                     break;
                 default:
-                    throw new OptionException(
+                    throw new ImperioException(
                             "Unknown option type " + arg.type);
                 }
             }

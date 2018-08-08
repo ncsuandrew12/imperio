@@ -21,23 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.imperio.examples.echo.p07help;
+package com.imperio;
 
-import java.io.PrintStream;
-
-import com.imperio.ImperioApp;
-import com.imperio.ImperioException;
-import com.imperio.UsageGen;
-
-public class Usage extends UsageGen {
-
-    @Override
-    public void printUsage(PrintStream ps, ImperioApp impApp)
-            throws ImperioException {
-
-        ps.println("Usage: " + impApp.invocation + " [SHORT-OPTION]... [STRING]...");
-        ps.println("  or:  " + impApp.invocation + " LONG-OPTION");
-
-    }
-
+/**
+ * @author afelsher
+ * 
+ * @since 1.0.0
+ */
+public enum OptionArchetype {
+    /**
+     * {@link OptionType}s of this type do not take arguments.
+     * 
+     * @since 1.0.0
+     */
+    NO_VALUE,
+    /**
+     * {@link OptionType}s of this type take arguments.
+     * 
+     * @since 1.0.0
+     */
+    VALUE;
 }

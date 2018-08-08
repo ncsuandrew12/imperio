@@ -1,19 +1,16 @@
 # Introduction
 
-The Imperio options library provides an easy way for Java applications to
-process command-line arguments without having to reproduce common logic. It
-allows applications to easily implement both single-char POSIX-style and
-long-form arguments.
+The Imperio options library provides an easy way for Java applications to process command-line arguments without having to reproduce common logic. It allows applications to easily implement both single-char POSIX-style and long-form arguments.
 
 # Instructions
 
-To use Imperio, follow these instructions:
+To use Imperio, follow these instructions.
 
 ## 1 - Download Imperio
 
 ### 1-1 - Download source zip file
 
-1. Download https://github.com/ncsuandrew12/imperio/archive/master.zip:  
+1. Download [https://github.com/ncsuandrew12/imperio/archive/master.zip](https://github.com/ncsuandrew12/imperio/archive/master.zip):  
  `wget https://github.com/ncsuandrew12/imperio/archive/master.zip`
 
 1. Unzip the archive:  
@@ -26,8 +23,7 @@ To use Imperio, follow these instructions:
 
 ### 2-1 - Install Gradle
 
-Install Gradle if you do not have it. Imperio is currently developed using
-Gradle 4.8, but other versions of Gradle will likely work.
+Install Gradle if you do not have it. Imperio is currently developed using Gradle 4.8, but other versions of Gradle will likely work.
 
 ### 2-1 - Build Imperio From Source
 
@@ -50,10 +46,9 @@ BUILD SUCCESSFUL in 15s
 
 ## 3 - Copy/Install Imperio
 
-Copy build/libs/Imperio.jar (or the version-name copy) to wherever you need it.
-Be sure to add this jar to your classpath and/or Ant/Gradle/Maven files.
+Copy `build/libs/Imperio.jar` (or the version-name copy) to wherever you need it.
 
-Now all you need to do is import Imperio packages/classes and get coding.
+Be sure to add this jar to your classpath and/or Ant/Gradle/Maven files.
 
 # Examples
 
@@ -61,8 +56,6 @@ For reference, there are example applications and Eclipse projects located here:
 
 [projects/examples](projects/examples)
 
-These examples mostly revolve around implementing the "echo" Unix utility using
-the Imperio library.
+These examples mostly revolve around implementing the "echo" Unix utility using the Imperio library.
 
-For detailed explanations of the example applications, see the included
-[EXAMPLES.md](docs/EXAMPLES.md) file
+For detailed explanations of the example applications, see the included [EXAMPLES.md](docs/EXAMPLES.md) file.
