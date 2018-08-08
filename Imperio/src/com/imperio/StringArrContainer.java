@@ -42,6 +42,7 @@ public class StringArrContainer {
 
     /**
      * @param str
+     *            the array of strings to hold
      * 
      * @since 1.0.0
      */

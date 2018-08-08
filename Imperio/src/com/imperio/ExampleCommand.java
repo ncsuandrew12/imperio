@@ -24,9 +24,13 @@
 package com.imperio;
 
 /**
- * <p>Instances of this class represent an example invocation of an application.</p>
+ * <p>
+ * Instances of this class represent an example invocation of an application.
+ * </p>
  * 
- * <p>This is used to generate example commands for the help text.</p>
+ * <p>
+ * This is used to generate example commands for the help text.
+ * </p>
  * 
  * @author afelsher
  *

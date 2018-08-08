@@ -40,13 +40,19 @@ public class ImperioAppSpec {
             new ErrorHandlerException();
     public static final String DEFAULT_HELP_ADDENDA = null;
     public static final HelpGen DEFAULT_HELP_GEN = new HelpGenDefault();
-    public static final OptionHelp DEFAULT_HELP_OPT = OptionHelp.generate();
+    public static final OptionHelp DEFAULT_HELP_OPT;
     public static final String DEFAULT_INVOCATION = null;
     public static final ImpLogger DEFAULT_LOGGER = new ImpLoggerNull();
     public static final boolean DEFAULT_NO_MATCH_ERROR = true;
     public static final String DEFAULT_SEE_ALSO = null;
     public static final String DEFAULT_USAGE_ADDENDA = null;
     public static final UsageGen DEFAULT_USAGE_GEN = new UsageGenNames();
+
+    static {
+        OptionSpec spec = OptionHelp.generateSpec();
+        spec.auto = true;
+        DEFAULT_HELP_OPT = OptionHelp.generate(spec);
+    }
 
     public String author = DEFAULT_AUTHOR;
     public String copyright = DEFAULT_COPYRIGHT;

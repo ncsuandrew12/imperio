@@ -43,7 +43,8 @@ public abstract class HelpGen {
     }
 
     /**
-     * @param impApp Imperio application instance
+     * @param impApp
+     *            Imperio application instance
      * 
      * @return the complete help text
      * 
@@ -64,7 +65,8 @@ public abstract class HelpGen {
     }
 
     /**
-     * @param impApp Imperio application instance
+     * @param impApp
+     *            Imperio application instance
      * 
      * @throws ImperioException
      * 
@@ -76,9 +78,11 @@ public abstract class HelpGen {
 
     /**
      * @param ps
-     * @param impApp Imperio application instance
+     *            print stream
+     * @param impApp
+     *            Imperio application instance
      * 
-     * @throws ImperioException 
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */

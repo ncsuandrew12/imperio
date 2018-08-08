@@ -28,7 +28,12 @@ import java.io.StringWriter;
 import java.util.ListIterator;
 
 /**
+ * This class only includes option's long-form name in the usage when the option
+ * does not have POSIX characters.
+ * 
  * @author afelsher
+ * 
+ * @see UsageGenNames
  *
  * @since 1.0.0
  */

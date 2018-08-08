@@ -30,10 +30,14 @@ package com.imperio;
  */
 public enum OptionArchetype {
     /**
+     * {@link OptionType}s of this type do not take arguments.
+     * 
      * @since 1.0.0
      */
     NO_VALUE,
     /**
+     * {@link OptionType}s of this type take arguments.
+     * 
      * @since 1.0.0
      */
     VALUE;

@@ -34,9 +34,10 @@ import java.io.PrintStream;
 public abstract class UsageGen {
 
     /**
-     * @param impApp Imperio application instance
+     * @param impApp
+     *            Imperio application instance
      * 
-     * @return
+     * @return the usage string for the given app
      * 
      * @throws ImperioException
      * 
@@ -55,7 +56,10 @@ public abstract class UsageGen {
     }
 
     /**
-     * @param impApp Imperio application instance
+     * Print the usage to the console.
+     * 
+     * @param impApp
+     *            Imperio application instance
      * 
      * @throws ImperioException
      * 
@@ -66,10 +70,14 @@ public abstract class UsageGen {
     }
 
     /**
-     * @param ps
-     * @param impApp Imperio application instance
+     * Print the usage to the given stream.
      * 
-     * @throws ImperioException 
+     * @param ps
+     *            print stream
+     * @param impApp
+     *            Imperio application instance
+     * 
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
