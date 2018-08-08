@@ -30,7 +30,8 @@ import com.imperio.OptionCallback;
 public class VerbCallback implements OptionCallback {
 
     @Override
-    public void callback(ImperioApp impApp, Option opt, Object oldVal) {
+    public void callback(ImperioApp impApp, Option opt, Object oldVal,
+            Object val) {
         System.out.printf("Incremented verbosity from %d to %d.\n", oldVal,
                 opt.getValue());
     }

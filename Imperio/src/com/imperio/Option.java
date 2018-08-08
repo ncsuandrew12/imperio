@@ -44,7 +44,7 @@ public class Option {
      * @param value
      *            value to check
      * 
-     * @return
+     * @return the given value if it is valid, else null
      * 
      * @throws ImperioException
      * 
@@ -85,8 +85,9 @@ public class Option {
 
     /**
      * @param spec
+     *            the option spec
      * 
-     * @return
+     * @return an option based on the given spec
      * 
      * @throws ImperioException
      * 
@@ -186,6 +187,7 @@ public class Option {
 
     /**
      * @param spec
+     *            option spec
      * 
      * @since 1.0.0
      */
@@ -204,7 +206,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the default value
      * 
      * @since 1.0.0
      */
@@ -213,7 +215,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the default value if it is a boolean, else null
      * 
      * @throws ImperioException
      * 
@@ -231,7 +233,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the default value if it is a File, else null
      * 
      * @throws ImperioException
      * 
@@ -252,7 +254,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the default value if it is an int, else null
      * 
      * @throws ImperioException
      * 
@@ -270,7 +272,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the default value if it is a string, else null
      * 
      * @throws ImperioException
      * 
@@ -288,7 +290,18 @@ public class Option {
     }
 
     /**
-     * @return
+     * <p>
+     * If this option has a long-form name, the invocation is "--abc" where
+     * "abc" is the long-form name of the option.
+     * </p>
+     * 
+     * <p>
+     * If this option only has a character, the invocation is "-a", where "a" is
+     * the character.
+     * </p>
+     * 
+     * @return the invocation form of this option as it would be specified on
+     *         the command line
      * 
      * @since 1.0.0
      */
@@ -300,7 +313,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the option's value
      * 
      * @since 1.0.0
      */
@@ -309,7 +322,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the option's value if it is a boolean, else null
      * 
      * @throws ImperioException
      * 
@@ -327,7 +340,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the option's value if it is a file, else null
      * 
      * @throws ImperioException
      * 
@@ -348,7 +361,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the option's value if it is an int, else null
      * 
      * @throws ImperioException
      * 
@@ -366,7 +379,7 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return the option's value if it is a string, else null
      * 
      * @throws ImperioException
      * 
@@ -384,7 +397,8 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return {@code true} if-and-only-if the option is a flag which is set to
+     *         {@code true}, else {@code false}
      * 
      * @throws ImperioException
      * 
@@ -401,7 +415,8 @@ public class Option {
     }
 
     /**
-     * @return
+     * @return {@code true} if the option was specified on the command line,
+     *         else {@code false}
      * 
      * @since 1.0.0
      */
@@ -410,6 +425,11 @@ public class Option {
     }
 
     /**
+     * Set the value of this option.
+     * 
+     * @param value
+     *            the new value
+     * 
      * @throws ImperioException
      * 
      * @since 1.0.0

@@ -28,7 +28,12 @@ import java.io.StringWriter;
 import java.util.ListIterator;
 
 /**
+ * This class only includes option POSIX characters in the usage when the option
+ * does not have a name.
+ * 
  * @author afelsher
+ * 
+ * @see UsageGenChars
  *
  * @since 1.0.0
  */

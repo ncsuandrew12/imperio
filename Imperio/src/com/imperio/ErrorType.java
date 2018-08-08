@@ -24,8 +24,9 @@
 package com.imperio;
 
 /**
- * Instances of this class represent a category of errors that may occur. In addition
- * to the predefined types statically defined here
+ * Instances of this class represent a category of errors that may occur. In
+ * addition to the predefined types statically defined here, applications may
+ * define their own types.
  * 
  * @author afelsher
  *
@@ -55,7 +56,9 @@ public class ErrorType {
 
     /**
      * @param code
+     *            error code
      * @param description
+     *            error description
      * 
      * @since 1.0.0
      */

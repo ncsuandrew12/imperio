@@ -179,10 +179,11 @@ public class ImperioApp {
 
     /**
      * @param spec
+     *            app spec
      * 
-     * @return
+     * @return an instance based on the given spec
      * 
-     * @throws ImperioException 
+     * @throws ImperioException
      * 
      * @since 1.0.0
      */
@@ -252,7 +253,9 @@ public class ImperioApp {
      * arguments are properly escaped and/or enclosed in quotes.
      * 
      * @param description
+     *            example command description
      * @param args
+     *            example command arguments
      * 
      * @since 1.0.0
      */
@@ -262,6 +265,7 @@ public class ImperioApp {
 
     /**
      * @param args
+     *            example command arguments
      * 
      * @since 1.0.0
      * 
@@ -273,6 +277,7 @@ public class ImperioApp {
 
     /**
      * @param option
+     *            new option
      * 
      * @throws InternalImperioException
      * 
@@ -459,7 +464,7 @@ public class ImperioApp {
     }
 
     /**
-     * @param index
+     * @param index example command index
      * 
      * @return the example command at the given index if it exists, else
      *         {@code null}
@@ -669,6 +674,8 @@ public class ImperioApp {
                     Option opt = null;
                     String subarg = subargs[sai];
                     Object oldVal = null;
+                    Object val = null;
+                    String valStr = null;
 
                     logger.log("");
                     logger.log("Processing subarg %d/%d for arg %d/%d: %s",
@@ -751,22 +758,8 @@ public class ImperioApp {
                     }
 
                     try {
-                        switch (opt.type) {
-                        case CUSTOM_FLAG:
-                            break;
-                        case FLAG:
-                            opt.setValue(true);
-                            if (opt.linkOption != null) {
-                                opt.linkOption.setValue(false);
-                            }
-                            break;
-                        case DECREMENTER:
-                            opt.setValue(((Integer) opt.getValue()) - 1);
-                            if (opt.linkOption != null) {
-                                opt.linkOption.setValue(opt.getValue());
-                            }
-                            break;
-                        case FILE:
+
+                        if (opt.type.archetype == OptionArchetype.VALUE) {
                             if (args.length <= argi + 1) {
                                 errorHandler.err(ErrorType.MISSING_ARG,
                                         this,
@@ -776,41 +769,47 @@ public class ImperioApp {
                                 continue saloop;
                             }
                             if (args[argi + 1].startsWith("-")) {
-                                errorHandler.err(ErrorType.INVALID_ARG, this,
+                                errorHandler.warn(this,
                                         "Value for \'%s\' (\'%s\') begins with "
                                                 + "hyphen. Possible missing "
                                                 + "value.",
                                         args[argi], args[argi + 1]);
                             }
-                            opt.setValue(new File(args[++argi]));
+                            val = valStr = args[++argi];
+                        }
+
+                        switch (opt.type) {
+                        case CUSTOM_FLAG:
+                            val = true;
+                        case FLAG:
+                            opt.setValue(val);
+                            if (opt.linkOption != null) {
+                                opt.linkOption.setValue(false);
+                            }
+                            break;
+                        case DECREMENTER:
+                            val = ((Integer) opt.getValue()) - 1;
+                            opt.setValue(val);
+                            if (opt.linkOption != null) {
+                                opt.linkOption.setValue(opt.getValue());
+                            }
+                            break;
+                        case FILE:
+                            val = new File(valStr);
+                            opt.setValue(val);
                             break;
                         case INCREMENTER:
-                            opt.setValue(((Integer) opt.getValue()) + 1);
+                            val = ((Integer) opt.getValue()) + 1;
+                            opt.setValue(val);
                             if (opt.linkOption != null) {
                                 opt.linkOption.setValue(opt.getValue());
                             }
                             break;
                         case ARG:
+                            opt.setValue(val);
+                            break;
                         case CUSTOM_ARG:
                         default:
-                            if (opt.type.archetype == OptionArchetype.VALUE) {
-                                if (args.length <= argi + 1) {
-                                    errorHandler.err(ErrorType.MISSING_ARG,
-                                            this,
-                                            "No value provided for \'%s\'",
-                                            args[argi]);
-                                    ret = false;
-                                    continue saloop;
-                                }
-                                if (args[argi + 1].startsWith("-")) {
-                                    errorHandler.warn(this,
-                                            "Value for \'%s\' (\'%s\') begins "
-                                                    + "with hyphen. Possible "
-                                                    + "missing value.",
-                                            args[argi], args[argi + 1]);
-                                }
-                                opt.setValue(args[++argi]);
-                            }
                             break;
                         }
                     } catch (ImperioException e) {
@@ -819,7 +818,7 @@ public class ImperioApp {
                     }
                     if (opt.callback != null) {
                         try {
-                            opt.callback.callback(this, opt, oldVal);
+                            opt.callback.callback(this, opt, oldVal, val);
                         } catch (ImperioException e) {
                             errorHandler.err(ErrorType.GENERIC, this,
                                     new InternalImperioException(e));
