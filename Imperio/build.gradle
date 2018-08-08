@@ -93,5 +93,7 @@ task release(dependsOn: [build, javadocJar]) {
 
         logger.lifecycle('Jar available at: {}', jarVer);
         logger.lifecycle('Jar available at: {}', jarPath);
+        logger.lifecycle('JavaDoc available at: {}', dirLibs + '/' + libName +
+            '-javadoc.jar');
     }
 }
