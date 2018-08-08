@@ -110,7 +110,7 @@ import java.util.Map;
  * <li>The - argument is not used to represent anything. It is ignored by this
  * library.</li>
  * <li>The -- string can be used to specify long-form options. However, when
- * used by itself it does terminate the options to be parses per POSIX.</li>
+ * used by itself it does terminate the options to be parsed per POSIX.</li>
  * </ol>
  * 
  * <p>
@@ -135,9 +135,9 @@ import java.util.Map;
  * 
  * <p>
  * For example, consider an application with only three valid options: "alice",
- * "bob", "charlie". "charlie" takes a value, but the other options are flags.
- * Assume the application developer linked the "a" char to "alice", the "b" char
- * to "bob", and the "c" char to "charlie".
+ * "bob", and "charlie". "charlie" takes a value, but the other options are
+ * flags. Assume the application developer linked the "a" char to "alice", the
+ * "b" char to "bob", and the "c" char to "charlie".
  * </p>
  * 
  * <p>
@@ -184,6 +184,7 @@ public class ImperioApp {
      * @return an instance based on the given spec
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -280,6 +281,7 @@ public class ImperioApp {
      *            new option
      * 
      * @throws InternalImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -410,6 +412,7 @@ public class ImperioApp {
      *         index, else {@code false}
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -484,6 +487,7 @@ public class ImperioApp {
      * @return the help text
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -557,6 +561,7 @@ public class ImperioApp {
      * @return the usage text
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -576,6 +581,7 @@ public class ImperioApp {
      *         {@code false} if there was an error or the help option was used.
      * 
      * @throws InternalImperioException
+     *             if an error occurs
      * 
      * @see #processArgs(String[], StringArrContainer)
      * 

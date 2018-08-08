@@ -44,6 +44,7 @@ public class OptionIndex {
      *            the option's character
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */

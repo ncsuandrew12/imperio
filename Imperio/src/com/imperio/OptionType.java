@@ -35,7 +35,7 @@ public enum OptionType {
     /**
      * <p>
      * Requires an argument to be provided along with the option.
-     * <p>
+     * </p>
      * 
      * <p>
      * The option's value is set to the given argument.
@@ -47,7 +47,7 @@ public enum OptionType {
     /**
      * <p>
      * Requires an argument to be provided along with the option.
-     * <p>
+     * </p>
      * 
      * <p>
      * Imperio doesn't do anything with this value other than pass it along to
@@ -85,7 +85,7 @@ public enum OptionType {
     /**
      * <p>
      * Requires an argument to be provided along with the option.
-     * <p>
+     * </p>
      * 
      * <p>
      * The option's value is set to a {@link java.io.File} object based on the

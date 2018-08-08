@@ -63,6 +63,7 @@ public class HelpGenDefault extends HelpGen {
      *            Imperio application instance
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */

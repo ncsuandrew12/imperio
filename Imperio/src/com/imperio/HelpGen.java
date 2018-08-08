@@ -49,6 +49,7 @@ public abstract class HelpGen {
      * @return the complete help text
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -69,6 +70,7 @@ public abstract class HelpGen {
      *            Imperio application instance
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -83,6 +85,7 @@ public abstract class HelpGen {
      *            Imperio application instance
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */

@@ -40,6 +40,7 @@ public abstract class UsageGen {
      * @return the usage string for the given app
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -62,6 +63,7 @@ public abstract class UsageGen {
      *            Imperio application instance
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -78,6 +80,7 @@ public abstract class UsageGen {
      *            Imperio application instance
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */

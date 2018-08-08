@@ -85,8 +85,7 @@ public class ImperioAppSpec {
 
     /**
      * @param spec
-     * 
-     * @throws InternalImperioException
+     *            app spec to duplicate
      * 
      * @since 1.0.0
      */
