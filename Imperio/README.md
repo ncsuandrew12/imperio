@@ -39,6 +39,7 @@ Example output:
 > Task :release
 Jar available at: build/libs/Imperio-0.0.0.jar
 Jar available at: build/libs/Imperio.jar
+JavaDoc available at: build/libs/Imperio-javadoc.jar
 
 BUILD SUCCESSFUL in 15s
 3 actionable tasks: 3 executed
