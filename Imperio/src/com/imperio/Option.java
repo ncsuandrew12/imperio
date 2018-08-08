@@ -90,6 +90,7 @@ public class Option {
      * @return an option based on the given spec
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -218,6 +219,7 @@ public class Option {
      * @return the default value if it is a boolean, else null
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -236,6 +238,7 @@ public class Option {
      * @return the default value if it is a File, else null
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -257,6 +260,7 @@ public class Option {
      * @return the default value if it is an int, else null
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -275,6 +279,7 @@ public class Option {
      * @return the default value if it is a string, else null
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -290,6 +295,11 @@ public class Option {
     }
 
     /**
+     * <p>
+     * Returns this option's invocation form as it would specified on the
+     * command line.
+     * </p>
+     * 
      * <p>
      * If this option has a long-form name, the invocation is "--abc" where
      * "abc" is the long-form name of the option.
@@ -325,6 +335,7 @@ public class Option {
      * @return the option's value if it is a boolean, else null
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -343,6 +354,7 @@ public class Option {
      * @return the option's value if it is a file, else null
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -364,6 +376,7 @@ public class Option {
      * @return the option's value if it is an int, else null
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -382,6 +395,7 @@ public class Option {
      * @return the option's value if it is a string, else null
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -401,6 +415,7 @@ public class Option {
      *         {@code true}, else {@code false}
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -431,6 +446,7 @@ public class Option {
      *            the new value
      * 
      * @throws ImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
