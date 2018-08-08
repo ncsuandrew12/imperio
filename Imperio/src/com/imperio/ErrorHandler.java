@@ -24,21 +24,31 @@
 package com.imperio;
 
 /**
+ * <p>
  * Implementations of this class handle errors and warnings which may occur
  * within the Imperio library. Developers may create their own implementations,
  * or use the built-in options.
+ * </p>
  * 
+ * <p>
  * {@link ErrorHandlerException} prints warnings to {@code System.out} and
  * throws {@link ImperioException}s on errors
+ * </p>
  * 
+ * <p>
  * {@link ErrorHandlerExit} behaves the same as {@link ErrorHandlerPrint}, but
  * exits with the given error type's code after printing.
+ * </p>
  * 
+ * <p>
  * {@link ErrorHandlerNull} silently ignores all warnings and errors, but does
  * store the first error like the others.
+ * </p>
  * 
+ * <p>
  * {@link ErrorHandlerPrint} prints errors to {@code System.err} and prints
  * warnings to {@code System.out}
+ * </p>
  * 
  * @author afelsher
  *
@@ -57,6 +67,7 @@ public interface ErrorHandler {
      *            error message printf args
      * 
      * @throws InternalImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -72,6 +83,7 @@ public interface ErrorHandler {
      *            exception
      * 
      * @throws InternalImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -93,6 +105,7 @@ public interface ErrorHandler {
      *            error message printf args
      * 
      * @throws InternalImperioException
+     *             if an error occurs
      * 
      * @since 1.0.0
      */
@@ -107,6 +120,8 @@ public interface ErrorHandler {
     public ErrorType firstError();
 
     /**
+     * Logs a warning.
+     * 
      * @param impApp
      *            Imperio application instance
      * @param format
