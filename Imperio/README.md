@@ -51,6 +51,12 @@ Copy `build/libs/Imperio.jar` (or the version-name copy) to wherever you need it
 
 Be sure to add this jar to your classpath and/or Ant/Gradle/Maven files.
 
+# Documentation
+
+Imperio's JavaDoc is included in the repo, and is also available online at:
+
+[https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/feature/master/Imperio/docs/javadoc/index.html](https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/feature/master/Imperio/docs/javadoc/index.html)
+
 # Examples
 
 For reference, there are example applications and Eclipse projects located here:
@@ -60,3 +66,8 @@ For reference, there are example applications and Eclipse projects located here:
 These examples mostly revolve around implementing the "echo" Unix utility using the Imperio library.
 
 For detailed explanations of the example applications, see the included [EXAMPLES.md](docs/EXAMPLES.md) file.
+
+# License
+
+Imperio is licensed under the MIT license. A copy of the license is available in the [LICENSE](LICENSE) file.
+
