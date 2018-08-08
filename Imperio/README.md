@@ -55,7 +55,7 @@ Be sure to add this jar to your classpath and/or Ant/Gradle/Maven files.
 
 Imperio's JavaDoc is included in the repo, and is also available online at:
 
-[https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/feature/master/Imperio/docs/javadoc/index.html](https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/feature/master/Imperio/docs/javadoc/index.html)
+[https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/master/Imperio/docs/javadoc/index.html](https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/master/Imperio/docs/javadoc/index.html)
 
 # Examples
 
