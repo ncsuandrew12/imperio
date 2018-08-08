@@ -24,6 +24,10 @@
 package com.imperio;
 
 /**
+ * Instances of this class are used as a unique identifier for any option in a
+ * given Imperio app. Either {@link #character} or {@link #name} may be null,
+ * but not both.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -35,7 +39,9 @@ public class OptionIndex {
 
     /**
      * @param name
+     *            the option's long-form name
      * @param character
+     *            the option's character
      * 
      * @throws ImperioException
      * 
@@ -52,11 +58,18 @@ public class OptionIndex {
     }
 
     /**
+     * Compare this index lexicographically to the given character.
+     * 
      * @param character
+     *            the character to compare to this index's character
      * 
-     * @return
+     * @return integer indicating the lexicographic order of this index compared
+     *         to the provided character
      * 
-     * @throws ImperioException if the given character is null
+     * @throws ImperioException
+     *             if the given character is null
+     * 
+     * @see #compareTo(OptionIndex)
      * 
      * @since 1.0.0
      */
@@ -65,9 +78,31 @@ public class OptionIndex {
     }
 
     /**
-     * @param optionIndex
+     * <p>
+     * Compare this index lexicographically to the given index.
+     * </p>
+     * <p>
+     * If both indices have names, these names are compared.
+     * </p>
+     * <p>
+     * If this index has a name but the provided index doesn't, this index's
+     * name is compared to the provided index's character.
+     * </p>
+     * <p>
+     * If this index doesn't have a name and the provided index does, this
+     * index's character is compared to the provided index's name.
+     * </p>
+     * <p>
+     * If neither indices have names, the indices' characers are compared.
+     * </p>
      * 
-     * @return
+     * @param optionIndex
+     *            the option index to compare this index to
+     * 
+     * @return a negative integer if this index lexicographically precedes the
+     *         provided index, 0 if they are lexicographically equivalent, or a
+     *         positive integer if this inidex lexicographically follows the
+     *         provided index
      * 
      * @since 1.0.0
      */
@@ -92,11 +127,18 @@ public class OptionIndex {
     }
 
     /**
+     * Compares this index lexicographically to the given name.
+     * 
      * @param name
+     *            the long-form name to compare to this index's long-form name
      * 
-     * @return
+     * @return integer indicating the lexicographic order of this index compared
+     *         to the provided name
      * 
-     * @throws ImperioException if the given name is null
+     * @see #compareTo(OptionIndex)
+     * 
+     * @throws ImperioException
+     *             if the given name is null
      * 
      * @since 1.0.0
      */

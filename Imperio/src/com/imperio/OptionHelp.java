@@ -24,6 +24,10 @@
 package com.imperio;
 
 /**
+ * <p>
+ * A help option is a special option class used to print the help text.
+ * </p>
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -35,7 +39,7 @@ public class OptionHelp extends Option {
     public static final String DEFAULT_NAME = "help";
 
     /**
-     * @return
+     * @return a help option based on the default help option spec
      * 
      * @since 1.0.0
      */
@@ -45,18 +49,18 @@ public class OptionHelp extends Option {
 
     /**
      * @param spec
+     *            the option spec
      * 
-     * @return
+     * @return a help option using the given spec
      * 
      * @since 1.0.0
      */
     public static OptionHelp generate(OptionSpec spec) {
-        spec.auto = true;
         return new OptionHelp(spec);
     }
 
     /**
-     * @return
+     * @return a default help option spec
      * 
      * @since 1.0.0
      */
@@ -70,7 +74,7 @@ public class OptionHelp extends Option {
     }
 
     /**
-     * @param spec
+     * @param spec the option spec
      * 
      * @since 1.0.0
      */

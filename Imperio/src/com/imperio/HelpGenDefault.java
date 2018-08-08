@@ -36,11 +36,6 @@ import java.util.ListIterator;
  */
 public class HelpGenDefault extends HelpGen {
 
-    /**
-     * @author afelsher
-     *
-     * @since 1.0.0
-     */
     private enum CharState {
         CONCAT,
         LINE_BUILD,

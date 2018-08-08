@@ -72,9 +72,11 @@ public class ImperioException extends Exception {
      * @param t
      *            throwable
      * @param prefix
+     *            error message prefix
      * @param format
      *            printf format string
      * @param args
+     *            printf args
      * 
      * @since 1.0.0
      */

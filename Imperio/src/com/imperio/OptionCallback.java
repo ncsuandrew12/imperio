@@ -24,6 +24,9 @@
 package com.imperio;
 
 /**
+ * This class is used as a container for the callback function used by
+ * {@link ImperioApp}.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
@@ -31,6 +34,9 @@ package com.imperio;
 public interface OptionCallback {
 
     /**
+     * When an option has been processed, this function will be called if the
+     * option's callback object has been set.
+     * 
      * @param impApp
      *            Imperio application instance
      * @param opt
@@ -38,12 +44,18 @@ public interface OptionCallback {
      * @param oldVal
      *            the value of the provided option before processing the latest
      *            instance of it
+     * @param val
+     *            If the option takes an argument, this is the value of the
+     *            argument of the most recent instance of the option. If the
+     *            option does not take an argument, this is the new value of the
+     *            option after processing the most recent instance of the
+     *            option.
      * 
      * @throws ImperioException
      * 
      * @since 1.0.0
      */
-    public void callback(ImperioApp impApp, Option opt, Object oldVal)
-            throws ImperioException;
+    public void callback(ImperioApp impApp, Option opt, Object oldVal,
+            Object val) throws ImperioException;
 
 }

@@ -24,7 +24,12 @@
 package com.imperio;
 
 /**
+ * Instances of this class contain all the data necessary to generate an
+ * {@link Option}.
+ * 
  * @author afelsher
+ * 
+ * @see Option#generate(OptionSpec)
  *
  * @since 1.0.0
  */
@@ -58,13 +63,18 @@ public class OptionSpec {
     public String valPlaceholder = DEFAULT_VAL_PLACEHOLDER;
 
     /**
+     * Create a new spec with default values.
+     * 
      * @since 1.0.0
      */
     public OptionSpec() {
     }
 
     /**
+     * Create a new spec with the same field values as the given spec.
+     * 
      * @param spec
+     *            spec to duplicate
      * 
      * @since 1.0.0
      */
