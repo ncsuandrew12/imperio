@@ -157,12 +157,12 @@ You've finished with the release proper. Direct users/adopters to [https://githu
 `git push --set-upstream origin doc/A.B.C-doc`  
 `cp -r ../../tmp-javadoc javadoc/A.B.C`  
 `cd javadoc`  
-`rm -f A.B`  
-`ln -s A.B.C A.B`  
-`rm -f A`  
-`ln -s A.B A`  
-`rm -f latest ###` (only if this a major release or a minor/  
-`ln -s A latest #` bugfix release for the latest major release)  
+`git rm -f A.B`  
+`cp -r A.B.C A.B`  
+`git rm -f A`  
+`cp -r A.B A`  
+`git rm -f latest ###` (only if this a major release or a minor/  
+`cp -r A latest #` bugfix release for the latest major release)  
 `git add A* latest`  
 `git commit -m "Added A.B.C JavaDoc"`
 
