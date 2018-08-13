@@ -24,6 +24,9 @@
 package com.imperio;
 
 /**
+ * Exception thrown directly from internal Imperio code, regardless of which
+ * {@link ErrorHandler} is used.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
