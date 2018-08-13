@@ -27,6 +27,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 /**
+ * Implementations of this class produce usage strings for a given app.
+ * 
  * @author afelsher
  *
  * @since 1.0.0

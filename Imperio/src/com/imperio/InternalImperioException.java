@@ -24,6 +24,8 @@
 package com.imperio;
 
 /**
+ * Exception class thrown by the {@link ErrorHandlerException}.
+ * 
  * @author afelsher
  *
  * @since 1.0.0
