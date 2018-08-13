@@ -41,18 +41,17 @@ Any release may make the following changes. However, it is generally recommended
 1. Rename function parameters
 1. Change or remove private or "no modifier" classes or functions (renaming, changing implements/extends classes, adding/removing parameters, changing parameter types, changing thrown exceptions, etc.)
 1. Modify documentation
-1. Remove third-party dependencies and/or import statements.
+1. Remove third-party dependencies and/or import statements
 
 The other version-based limitations are:
 
 1. Major releases may change anything and everything within Imperio.  
 **Only** major releases may do the following:
-    1. Change class or function names
-    1. Remove classes or functions
-    1. Change or remove public or protected functions
+    1. Change names of public or protected classes or functions
+    1. Remove public or protected classes or functions
     1. Change or remove public or protected fields or variables
-    1. Change the name of the Imperio jar file or other deliverables.
-    1. Add new third-party dependencies.
+    1. Change the name of the Imperio jar file or other deliverables
+    1. Add new third-party dependencies
 
 1. Minor releases **must** be backwards-compatible. That is, applications should not have to recompile their code to switch from 1.0.0 to 1.1.1. However, minor releases may introduce new classes, functions or functionality, and applications may need to be updated and recompiled to take advantage of new classes, functions, etc.
 
