@@ -6,7 +6,7 @@ None.
 
 ## Bug Fixes
 
-None.
+Fixed issue where flag options would not get set.
 
 ## Documentation Changes
 
