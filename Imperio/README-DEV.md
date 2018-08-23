@@ -145,28 +145,10 @@ You've finished with the release proper. Direct users/adopters to [https://githu
 
 ## Post-Release Process
 
-1. Update documentation branch JavaDoc:  
-`git checkout tags/A.B.C`  
-`cd Imperio`  
-`rm -rf ../../tmp-javadoc`  
-`cp -r docs/javadoc ../../tmp-javadoc`  
+1. Update the documentation branch index:  
 `git checkout documentation`  
 `git pull`  
-`git checkout -b doc/A.B.C-doc`  
-`git push --set-upstream origin doc/A.B.C-doc`  
-`cp -r ../../tmp-javadoc javadoc/A.B.C`  
-`cd javadoc`  
-`git rm -f A.B`  
-`cp -r A.B.C A.B`  
-`git rm -f A`  
-`cp -r A.B A`  
-`git rm -f latest ###` (only if this a major release or a minor/  
-`cp -r A latest #` bugfix release for the latest major release)  
-`git add A* latest`  
-`git commit -m "Added A.B.C JavaDoc"`
-
-1. Update the documentation branch index:  
-`cd ../`
+`git checkout -b doc/A.B.C-doc`
 
     1. Update the release list in [DOCUMENTATION.md](https://github.com/ncsuandrew12/imperio/blob/documentation/Imperio/DOCUMENTATION.md)  
 Add this line (with the actual version) to the appropriate place in the release list:  
@@ -174,11 +156,11 @@ Add this line (with the actual version) to the appropriate place in the release 
 
     1. Update the JavaDoc list in DOCUMENTATION.md  
 Add this line (with the actual version) to the appropriate place in the JavaDoc list:  
-`1. [A.B.C](https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/documentation/Imperio/javadoc/A.B.C/index.html)`
+`1. [A.B.C](https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/A.B.C/Imperio/docs/javadoc/index.html)`
 
 1. Open a [pull request](https://github.com/ncsuandrew12/imperio/compare)  
 `git add DOCUMENTATION.md`  
-`git commit -m "Updated DOCUMENTATION.md for A.B.C"`  
+`git commit -m "Updated DOCUMENTATION.md for A.B.C."`  
 `git push`  
 base: documentation  
 compare: doc/A.B.C-doc

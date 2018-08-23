@@ -10,7 +10,7 @@ None.
 
 ## Documentation Changes
 
-None.
+1. Updated release process in README-DEV.md.
 
 ## Other Changes
 
