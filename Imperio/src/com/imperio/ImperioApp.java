@@ -786,8 +786,8 @@ public class ImperioApp {
 
                         switch (opt.type) {
                         case CUSTOM_FLAG:
-                            val = true;
                         case FLAG:
+                            val = true;
                             opt.setValue(val);
                             if (opt.linkOption != null) {
                                 opt.linkOption.setValue(false);
