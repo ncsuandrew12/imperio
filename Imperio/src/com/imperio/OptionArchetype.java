@@ -24,6 +24,8 @@
 package com.imperio;
 
 /**
+ * This class defines the higher-level categories of {@link OptionType}s.
+ * 
  * @author afelsher
  * 
  * @since 1.0.0
