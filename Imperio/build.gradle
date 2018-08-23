@@ -3,7 +3,7 @@ apply plugin: 'java'
 import java.text.SimpleDateFormat;
 
 // Set the version here!
-def versionMain = '1.0.0'
+def versionMain = '1.0.1'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7

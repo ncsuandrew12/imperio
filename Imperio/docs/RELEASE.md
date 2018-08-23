@@ -6,7 +6,7 @@ None.
 
 ## Bug Fixes
 
-Fixed issue where flag options would not get set.
+1. Fixed issue where flag options would not get set.
 
 ## Documentation Changes
 
@@ -18,6 +18,12 @@ Fixed issue where flag options would not get set.
 None.
 
 ## History
+
+### 1.0.1
+
+1. Fixed issue where flag options would not get set.
+1. README-DEV.md added.
+1. Release notes file added.
 
 ### 1.0.0
 
