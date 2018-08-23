@@ -6,12 +6,11 @@ None.
 
 ## Bug Fixes
 
-1. Fixed issue where flag options would not get set.
+None.
 
 ## Documentation Changes
 
-1. README-DEV.md added.
-1. Release notes file added.
+None.
 
 ## Other Changes
 
