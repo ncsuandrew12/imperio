@@ -61,7 +61,7 @@ Imperio's JavaDoc is included in the repo, and is also available online at:
 
 For reference, there are example applications and Eclipse projects located here:
 
-[Imperio/projects/examples](projects/examples)
+[Imperio/projects/examples](Imperio/projects/examples)
 
 These examples mostly revolve around implementing the "echo" Unix utility using the Imperio library.
 
