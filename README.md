@@ -55,13 +55,13 @@ Be sure to add this jar to your classpath and/or Ant/Gradle/Maven files.
 
 Imperio's JavaDoc is included in the repo, and is also available online at:
 
-[https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/documentation/Imperio/javadoc/latest/index.html](https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/documentation/Imperio/javadoc/latest/index.html)
+[https://github.com/ncsuandrew12/imperio/blob/documentation/Imperio/DOCUMENTATION.md](https://github.com/ncsuandrew12/imperio/blob/documentation/Imperio/DOCUMENTATION.md)
 
 # Examples
 
 For reference, there are example applications and Eclipse projects located here:
 
-[projects/examples](projects/examples)
+[Imperio/projects/examples](projects/examples)
 
 These examples mostly revolve around implementing the "echo" Unix utility using the Imperio library.
 
