@@ -37,13 +37,13 @@ Note that there is no `--help` option created, but we still get help text when w
 
 The `ImperioApp.generate()` function is used to actually create the Imperio library's representation of the application and takes an `ImperioAppSpec` as its only parameter. The `ImperoAppSpec` is similar to the OptionSpec, but contains values needed to create an ImperioApp. Generally, a developer should at least set the `invocation` and the options list (via `addOption()`).
 
-The base invocation string is used to create the usage text and should correspond to what the user needs to actually type to invoke the command. In this example, we use `"echo"` as the invocation, but in reality the user would need to invoke a complicate java command specifying the full package and class name of our example class.
+The base invocation string is used to create the usage text and should correspond to what the user needs to actually type to invoke the command. In this example, we use `"echo"` as the invocation, but in reality the user would need to invoke a complicated java command specifying the full package and class name of our example class.
 
 If your application uses a startup script, it could simply use this script name as the invocation string. For example:
 
 ```java
 ImperioAppSpec iaSpec = new ImperioAppSpec();
-iaSpec.invocation = "startup.sh";
+iaSpec.invocation = "echo";
 iaSpec.options = optionList;
 ImperioApp.generate(iaSpec);
 ```
@@ -74,7 +74,7 @@ Project: [Echo](../projects/examples/Echo)
 
 Package: [com.imperio.examples.echo.p03posix](../projects/examples/Echo/src/com/imperio/examples/echo/p03posix)
 
-So far, we've created options that map to the Unix echo command, but most of `echo`'s options are single-character options. And we've only provided long-form option names.
+So far, we've created options that map to the GNU echo command's options, but most of `echo`'s options are single-character options. And we've only provided long-form option names.
 
 Imperio supports the ability to add single-character POSIX options. For more information on POSIX compliance and deviations, see the `ImperoApp` class's Javadoc. The main noteworthy feature is that when a single hyphen is used, any number of single-character options can be specified, though only the absolute last one in the argument may specify a value. The rest must be "flag" style, in that they don't take an argument.
 
