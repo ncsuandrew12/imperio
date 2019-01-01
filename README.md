@@ -25,7 +25,7 @@ To use Imperio, follow these instructions.
 
 Install Gradle if you do not have it. Imperio is currently developed using Gradle 4.8, but other versions of Gradle will likely work.
 
-### 2-1 - Build Imperio From Source
+### 2-2 - Build Imperio From Source
 
 Compile Imperio into a jar:
 
