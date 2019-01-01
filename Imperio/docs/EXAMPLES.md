@@ -35,7 +35,7 @@ Note that there is no `--help` option created, but we still get help text when w
 
 ## E1B - Creating the ImperioApp
 
-The `ImperioApp.generate()` function is used to actually create the Imperio library's representation of the application and takes an `ImperialAppSpec` as its only parameter. The `ImperialAppSpec` is similar to the OptionSpec, but contains values needed to create an ImperialAppSpec. Generally, a developer should at least set the `invocation` and the options list (via `addOption()`).
+The `ImperioApp.generate()` function is used to actually create the Imperio library's representation of the application and takes an `ImperioAppSpec` as its only parameter. The `ImperoAppSpec` is similar to the OptionSpec, but contains values needed to create an ImperioApp. Generally, a developer should at least set the `invocation` and the options list (via `addOption()`).
 
 The base invocation string is used to create the usage text and should correspond to what the user needs to actually type to invoke the command. In this example, we use `"echo"` as the invocation, but in reality the user would need to invoke a complicate java command specifying the full package and class name of our example class.
 
