@@ -154,10 +154,6 @@ You've finished with the release proper. Direct users/adopters to [https://githu
 Add this line (with the actual version) to the appropriate place in the release list:  
 `1. [A.B.C](https://github.com/ncsuandrew12/imperio/tree/A.B.C)`
 
-    1. Update the JavaDoc list in DOCUMENTATION.md  
-Add this line (with the actual version) to the appropriate place in the JavaDoc list:  
-`1. [A.B.C](https://htmlpreview.github.io/?https://github.com/ncsuandrew12/imperio/blob/A.B.C/Imperio/docs/javadoc/index.html)`
-
 1. Open a [pull request](https://github.com/ncsuandrew12/imperio/compare)  
 `git add DOCUMENTATION.md`  
 `git commit -m "Updated DOCUMENTATION.md for A.B.C."`  
