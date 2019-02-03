@@ -53,9 +53,7 @@ Be sure to add this jar to your classpath and/or Ant/Gradle/Maven files.
 
 # Documentation
 
-Imperio's JavaDoc is included in the repo, and is also available online at:
-
-[https://github.com/ncsuandrew12/imperio/blob/documentation/Imperio/DOCUMENTATION.md](https://github.com/ncsuandrew12/imperio/blob/documentation/Imperio/DOCUMENTATION.md)
+Imperio's JavaDoc is included in the repo.
 
 # Examples
 
